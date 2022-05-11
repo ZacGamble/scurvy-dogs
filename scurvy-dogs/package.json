@@ -1,0 +1,34 @@
+{
+  "name": "codeworks-auth-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "node index.js",
+    "start": "node index.js",
+    "dev": "node index.js",
+    "setup": "npm install",
+    "sass": "sass --watch client/assets/scss/main.scss:client/assets/style/main.css"
+  },
+  "author": "Codeworks",
+  "license": "ISC",
+  "dependencies": {
+    "@bcwdev/auth0provider": "^1.0.12",
+    "cors": "2.8.5",
+    "dotenv": "16.0.0",
+    "esm": "3.2.25",
+    "express": "4.17.3",
+    "helmet": "4.6.0",
+    "mongoose": "6.3.1",
+    "socket.io": "4.4.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "eslint": "8.14.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.0.0",
+    "sass": "1.50.1"
+  }
+}
