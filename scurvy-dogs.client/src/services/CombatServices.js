@@ -1,17 +1,19 @@
 
 
-class CombatServices { 
+class combatService { 
 
-  async connonAttack(){
+  async attack(actorId, targetId){
    
   }
  
- async dodgeAttack(id) {
+ async dodge(actorId, targetId) {
   
  }
 
- async calculateDamage() {
+ async damage(targetId) {
   
  }
 
 }
+
+export const combatService = new combatService()
