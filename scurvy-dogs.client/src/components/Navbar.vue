@@ -18,10 +18,10 @@
       <ul class="navbar-nav me-auto">
         <li>
           <router-link
-            :to="{ name: 'About' }"
+            :to="{ name: 'Ships' }"
             class="btn text-success lighten-30 selectable text-uppercase"
           >
-            About
+            Ship Details
           </router-link>
         </li>
       </ul>
