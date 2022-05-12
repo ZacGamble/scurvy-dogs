@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { historiesService } from "../services/HistoriesService.js";
 import { shipsService } from "../services/ShipsService.js";
+import { upgradesService } from "../services/UpgradesService.js";
 import BaseController from "../utils/BaseController.js";
 
 export class ShipsController extends BaseController
@@ -45,7 +46,7 @@ export class ShipsController extends BaseController
     {
        try
        {
-           return res.send();
+           return res.send(upgradesService.addToShip(req.body.upgradeId, req.params.id));
        }
        catch(error)
        {
