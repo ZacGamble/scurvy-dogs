@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center p-3 rounded">
           <img
             src="https://images.unsplash.com/photo-1474224348275-dd142b14f8c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcCUyMGh1bGx8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
             alt="ship hull"
@@ -11,18 +11,19 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div>
+        <div class="py-3">
           Ship stats:
           <ul>
-            <li>Speed</li>
-            <li>Attack</li>
-            <li>Finishing blows</li>
-            <li>Wins</li>
+            <li>Speed: 7 knots</li>
+            <li>Attack: 3</li>
+            <li>Finishing blows: 2</li>
+            <li>Wins: 0</li>
           </ul>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 py-3">
+        Upgrades
         <div class="row">
           <div class="col-6 my-3">
             <div class="p-3 bg-secondary">Hull</div>
