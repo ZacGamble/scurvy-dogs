@@ -15,10 +15,10 @@ export const LobbySchema = new Schema (
     }
 );
 
-LobbySchema.virtual("boss",
-{
-    localField: "bossId",
-    foreignField: "_id",
-    ref: "Boss",
-    justOne: true
-});
+// LobbySchema.virtual("boss",
+// {
+//     localField: "bossId",
+//     foreignField: "_id",
+//     ref: "Boss",
+//     justOne: true
+// });

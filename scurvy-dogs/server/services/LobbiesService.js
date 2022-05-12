@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { bossesService } from "./BossesService.js";
 import { entriesService } from "./EntriesService.js";
 
 class LobbiesService

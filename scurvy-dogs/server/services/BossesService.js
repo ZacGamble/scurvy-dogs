@@ -3,6 +3,11 @@ import { BadRequest, Forbidden } from "../utils/Errors.js";
 
 class BossesService
 {
+    async getByLobbyId(lobbyId)
+    {
+        return await dbContext.Bossess.find({ lobbyId });
+    }
+
     async edit(update)
     {
         const edited = await dbContext.Bossess.findById(update.id)
