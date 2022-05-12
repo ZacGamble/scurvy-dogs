@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { historiesService } from '../services/HistoriesService.js'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -8,6 +9,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .get("/history", this.getHistory)
       .put("", this.edit)
   }
 
@@ -18,6 +20,18 @@ export class AccountController extends BaseController {
     } catch (error) {
       next(error)
     }
+  }
+
+  async getHistory(req, res, next)
+  {
+        try
+        {
+            return res.send(await historiesService.getByAccountId(req.userInfo.id));
+        }
+        catch(error)
+        {
+            next(error);
+        }
   }
 
   async edit(req, res, next)
