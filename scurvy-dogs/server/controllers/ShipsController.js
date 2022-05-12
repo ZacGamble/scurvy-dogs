@@ -58,7 +58,9 @@ export class ShipsController extends BaseController
     {
        try
        {
-           return res.send();
+           req.body.accountId = req.userInfo.id;
+           req.body.id = req.params.id;
+           return res.send(await shipsService.edit(req.body));
        }
        catch(error)
        {
@@ -70,7 +72,7 @@ export class ShipsController extends BaseController
     {
        try
        {
-           return res.send();
+           return res.send(await shipsService.remove(req.params.id, req.userInfo.id));
        }
        catch(error)
        {
