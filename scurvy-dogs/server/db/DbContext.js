@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
+import { EntrySchema } from '../models/Entry.js';
 import { HistorySchema } from '../models/History.js';
 import { LobbySchema } from '../models/Lobby.js';
 import { ShipSchema } from '../models/Ship.js';
@@ -14,6 +15,7 @@ class DbContext {
   Upgrades = mongoose.model("Upgrade", UpgradeSchema);
   ShipUpgrades = mongoose.model("ShipUpgrades", ShipUpgradeSchema);
   Lobbies = mongoose.model("Lobby", LobbySchema);
+  Entries = mongoose.model("Entry", EntrySchema);
 }
 
 export const dbContext = new DbContext()

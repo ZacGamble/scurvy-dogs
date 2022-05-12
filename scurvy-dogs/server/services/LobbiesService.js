@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { entriesService } from "./EntriesService.js";
 
 class LobbiesService
 {
@@ -44,6 +45,7 @@ class LobbiesService
         }
         removed.isFinished = true;
         await removed.save();
+        entriesService.removeByLobby(id);
         return removed;
     }
 }
