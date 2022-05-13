@@ -2,9 +2,12 @@
   <div class="row d-flex bg-light boss-card m-5">
     <div class="col-md-6">
       <span class="d-flex">
-        <router-link :to="{ name: 'Battle' }">
-          <div class="left-triangle"></div>
-        </router-link>
+        <div
+          @click="openBattle()"
+          class="left-triangle action"
+          title="Fight the Boss!"
+        ></div>
+
         <i class="mdi mdi-skull fs-1"></i>
         <h4 class="mt-3">Mango Mangler</h4>
       </span>
@@ -36,6 +39,10 @@
 </template>
 
 <script>
+import { router } from '../router';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
+import { lobbiesService } from '../services/LobbiesService.js'
 export default {
   props: {
     boss: {
@@ -44,7 +51,18 @@ export default {
     },
   },
   setup() {
-    return {};
+    return {
+      async openBattle() {
+        try {
+          const id = await lobbiesService.create()
+          router.push({ name: 'Battle', params: { id } })
+
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+    };
   },
 };
 </script>

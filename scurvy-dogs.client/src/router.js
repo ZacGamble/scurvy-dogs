@@ -30,7 +30,7 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/battle',
+    path: '/battle/:id',
     name: 'Battle',
     component: loadPage('BattlePage'),
     beforeEnter: authGuard

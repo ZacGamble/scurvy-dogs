@@ -22,8 +22,9 @@ class LobbiesService
 
     async create(data)
     {
-        const newBoss = await dbContext.Bossess.create({ health: 1000, creatorId: data.creatorId });
-        return await dbContext.Lobbies.create({...data, bossId: newBoss.id});
+        const newLobby = await dbContext.Lobbies.create(data);
+        await dbContext.Bosses.create({ health: 1000, creatorId: data.creatorId, lobbyId: newLobby.id });
+        return newLobby
     }
 
     async edit(update)

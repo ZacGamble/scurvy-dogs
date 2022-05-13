@@ -1,8 +1,13 @@
-const { AppState } = require("../AppState");
-const { api } = require("./AxiosService");
+import { AppState } from"../AppState";
+import { api } from "./AxiosService";
 
 
 class LobbiesService {
+ async create(){
+     const res = await api.post('api/lobby')
+     AppState.currentLobby = res.data
+     return res.data.id
+ }
  async getAll() {
   const res = await api.get('api/lobby')
   AppState.lobbies = res.data
@@ -24,3 +29,5 @@ class LobbiesService {
  }
 
 }
+
+export const lobbiesService = new LobbiesService()
