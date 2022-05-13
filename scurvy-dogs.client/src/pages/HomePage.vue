@@ -1,8 +1,11 @@
 <template>
-  <div class="ahh">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="">
+    <div class="row g-0">
+      <div class="col-md-8 my-5">
         <Boss />
+      </div>
+      <div class="col-md-4 side-map">
+        <SideBar />
       </div>
     </div>
   </div>
@@ -14,4 +17,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.side-map {
+  background-image: url("../assets/img/Side-map.svg");
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+</style>

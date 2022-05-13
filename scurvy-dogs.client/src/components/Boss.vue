@@ -1,5 +1,5 @@
 <template>
-  <div class="row d-flex bg-light">
+  <div class="row d-flex bg-light boss-card m-5">
     <div class="col-md-6">
       <span class="d-flex">
         <div class="left-triangle"></div>
@@ -53,5 +53,10 @@ export default {
   width: 0;
   border-top: 5em red solid;
   border-right: 5em transparent solid;
+}
+
+.boss-card {
+  outline: 0.1em rgb(0, 0, 0) solid;
+  border: 1em rgb(255, 255, 255) solid;
 }
 </style>

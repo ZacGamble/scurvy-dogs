@@ -1,24 +1,22 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
+  <header><Navbar /></header>
+  <main><router-view /></main>
   <footer></footer>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from './AppState'
+import { computed } from "vue";
+import { AppState } from "./AppState";
+import Navbar from "./components/Navbar.vue";
 export default {
-  name: 'App',
+  components: { Navbar },
+  name: "App",
   setup() {
     return {
-      appState: computed(() => AppState)
-    }
-  }
-}
+      appState: computed(() => AppState),
+    };
+  },
+};
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
