@@ -17,7 +17,7 @@ class DbContext {
   ShipUpgrades = mongoose.model("ShipUpgrades", ShipUpgradeSchema);
   Lobbies = mongoose.model("Lobby", LobbySchema);
   Entries = mongoose.model("Entry", EntrySchema);
-  Bossess = mongoose.model("Boss", BossSchema);
+  Bosses = mongoose.model("Boss", BossSchema);
 }
 
 export const dbContext = new DbContext()
