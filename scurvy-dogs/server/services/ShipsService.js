@@ -18,6 +18,11 @@ class ShipsService
         return await dbContext.Ships.find({ lobbyId }).populate("creator", "name picture");
     }
 
+    async createShip(data)
+    {
+        return await dbContext.Ships.create(data);
+    }
+
     async edit(update)
     {
         const edited = await this.getById(update.id);

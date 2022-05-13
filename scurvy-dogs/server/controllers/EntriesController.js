@@ -30,7 +30,7 @@ export class EntriesController extends BaseController
         try
         {
             req.body.accountId = req.userInfo.id;
-            return res.send(await req.body);
+            return res.send(await entriesService.create(req.body));
         }
         catch(error)
         {
