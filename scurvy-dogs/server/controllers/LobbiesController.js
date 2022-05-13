@@ -87,6 +87,8 @@ export class LobbiesController extends BaseController
         try
         {
             req.body.creatorId = req.userInfo.id;
+            req.body.isFinished = false;
+            req.body.isStarted = false;
             return res.send(await lobbiesService.create(req.body));
         }
         catch(error)
