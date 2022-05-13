@@ -12,3 +12,19 @@ export const EntrySchema = new Schema (
         toJSON: { virtuals: true }
     }
 );
+
+EntrySchema.virtual("ship",
+{
+    localField: "shipId",
+    foreignField: "_id",
+    ref: "Ship",
+    justOne: true
+});
+
+EntrySchema.virtual("creator",
+{
+    localField: "accountId",
+    foreignField: "_id",
+    ref: "Account",
+    justOne: true
+});
