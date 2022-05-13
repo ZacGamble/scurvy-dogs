@@ -2,7 +2,9 @@
   <div class="row d-flex bg-light boss-card m-5">
     <div class="col-md-6">
       <span class="d-flex">
-        <div class="left-triangle"></div>
+        <router-link :to="{ name: 'Battle' }">
+          <div class="left-triangle"></div>
+        </router-link>
         <i class="mdi mdi-skull fs-1"></i>
         <h4 class="mt-3">Mango Mangler</h4>
       </span>
