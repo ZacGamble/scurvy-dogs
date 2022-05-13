@@ -3,27 +3,21 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex text-dark">Ye Scurvy Dogs!</div>
     </router-link>
-    <button
-      class="navbar-toggler text-dark"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+
+    <router-link :to="{ name: 'Ships' }" class="btn selectable text-uppercase">
+      <button
+        class="text-dark"
+        type="button"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        Ship Details
+      </button>
+    </router-link>
+    <div class="" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'Ships' }"
-            class="btn selectable text-uppercase"
-          >
-            Ship Details
-          </router-link>
-        </li>
+        <li></li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
