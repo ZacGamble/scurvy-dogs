@@ -7,7 +7,7 @@ export const LobbySchema = new Schema (
         creatorId: { type: Schema.Types.ObjectId, ref: "Account", required: true },
         isStarted: { type: Boolean, required: false },
         isFinished: { type: Boolean, default: false },
-        bossId: { type: Schema.Types.ObjectId, ref: "Boss", required: true }
+       
     },
     {
         timestamps: true,
