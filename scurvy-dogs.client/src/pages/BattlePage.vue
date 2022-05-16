@@ -4,11 +4,24 @@
       <div class="col">
         <div class="row d-block">
           <div class="col-8">
-            <img
-              class="boss-img"
-              src="https://thiscatdoesnotexist.com"
-              alt=""
-            />
+            <div class="">
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  :style="'width: ' + boss?.health / 10 + '%;'"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <img
+                class="boss-img"
+                src="https://thiscatdoesnotexist.com"
+                alt=""
+              />
+              <button @click="attack()" class="btn btn-danger">ATTACK</button>
+            </div>
           </div>
           <div class="col-4">
             <div class="row justify-content-around bg-dark">
@@ -41,11 +54,45 @@
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import { useRoute } from 'vue-router';
+import { bossService } from '../services/BossService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
+import { AppState } from '../AppState';
+import { onMounted } from '@vue/runtime-core';
+import { combatService } from '../services/CombatService';
+import { shipsService } from '../services/ShipsService';
 export default {
+
   setup() {
-    return {};
-  },
-};
+    const route = useRoute()
+    onMounted(async () => {
+      try {
+        await bossService.getBossById(route.params.id)
+        await shipsService.getShipsByEntry()
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    })
+
+    return {
+      boss: computed(() => AppState.boss),
+
+      async attack() {
+        AppState.boss.health -= 50
+        try {
+          await combatService.attack(null, boss.id)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

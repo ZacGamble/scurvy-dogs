@@ -3,8 +3,6 @@
     <header class="">
       <div class="row">
         <div class="col-12 text-center">
-          <!-- LOGIN COMPONENT HERE -->
-          <Login />
           <h1>The Flying Dutch</h1>
         </div>
         <div class="col d-flex m-3 ps-4">

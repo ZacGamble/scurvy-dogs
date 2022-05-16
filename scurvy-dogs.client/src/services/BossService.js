@@ -1,12 +1,13 @@
 import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class BossService {
 
- async getBossById() {
-  const res = await api.get('api/boss/' + id)
+ async getBossById(id) {
+  const res = await api.get('api/lobby/' + id + '/boss')
   logger.log('get Boss by Id!', res.data)
-  AppState.boss = res.data
+  AppState.boss = res.data[0]
  }
 
  async removeBoss(id) {
