@@ -63,12 +63,14 @@ import { AppState } from '../AppState';
 import { onMounted } from '@vue/runtime-core';
 import { combatService } from '../services/CombatService';
 import { shipsService } from '../services/ShipsService';
+import { entriesService } from '../services/EntriesService.js';
 export default {
 
   setup() {
     const route = useRoute()
     onMounted(async () => {
       try {
+        await entriesService.getByLobby(route.params.id)
         await bossService.getBossById(route.params.id)
         await shipsService.getShipsByEntry(route.params.id)
       } catch (error) {
@@ -83,7 +85,7 @@ export default {
       lobbyShips: computed(() => AppState.lobbyShips),
 
       async attack() {
-        AppState.boss.health -= 50
+        AppState.boss.health -= AppState.activeEntry.ship.power
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
         } catch (error) {

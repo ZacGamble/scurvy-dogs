@@ -7,7 +7,7 @@ class EntriesService
 {
     async getByAccount(accountId)
     {
-        return await dbContext.Entries.find({ accountId });
+        return await dbContext.Entries.find({ accountId }).populate('ship');
     }
 
     async create(data)
@@ -21,13 +21,18 @@ class EntriesService
         {
             throw new BadRequest("That lobby is already over.");
         }
-        return await dbContext.Entries.create(data);
+        const newEntry =  await dbContext.Entries.create(data);
+        await newEntry.populate('ship')
+        return newEntry
     }
 
     async removeByLobby(lobbyId)
     {
         const removed = await dbContext.Entries.find({ lobbyId });
         removed.forEach(entry => entry.remove());
+    }
+    async getByLobby(data) {
+        return await dbContext.Entries.findOne({accountId : data.accountId, lobbyId : data.lobbyId}).populate('ship')
     }
 }
 
