@@ -12,8 +12,25 @@
 </template>
 
 <script>
+import { shipsService } from '../services/ShipsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
 export default {
   name: "Home",
+  setup() {
+    return {
+      async createShip() {
+        try {
+          await shipsService.createShip()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+    }
+  }
+
+
 
 
 };
