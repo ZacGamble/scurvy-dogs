@@ -1,8 +1,14 @@
+import res from "express/lib/response";
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
 
 class ShipsService
 {
+    async getByAccount(accountId)
+    {
+        return await dbContext.Ships.find({ accountId });
+    }
+
     async getById(id)
     {
         const found = await dbContext.Ships.findById(id).populate("creator", "name picture");

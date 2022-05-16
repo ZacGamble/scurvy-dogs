@@ -43,6 +43,7 @@ import { router } from '../router';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { lobbiesService } from '../services/LobbiesService.js'
+import { AppState } from '../AppState';
 export default {
   props: {
     boss: {
@@ -55,6 +56,8 @@ export default {
       async openBattle() {
         try {
           const id = await lobbiesService.create()
+          const newEntry = { lobbyId: id, shipId: AppState.userShips[0].id };
+          AppState.activeEntry = await entriesService.create(newEntry);
           router.push({ name: 'Battle', params: { id } })
 
         } catch (error) {
