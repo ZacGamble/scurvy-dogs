@@ -6,5 +6,7 @@ export const AppState = reactive({
   boss: null,
   account: {},
   lobbies: [],
-  currentLobby: {}
+  currentLobby: {},
+  ships: [],
+  userShips: []
 })

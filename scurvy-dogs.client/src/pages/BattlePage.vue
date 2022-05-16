@@ -79,6 +79,7 @@ export default {
 
     return {
       boss: computed(() => AppState.boss),
+      ships: computed(() => AppState.ships),
 
       async attack() {
         AppState.boss.health -= 50
