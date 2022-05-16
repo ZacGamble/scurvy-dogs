@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 export const ShipSchema = new Schema (
     {
         name: { type: String, required: true },
+        durability: { type: Number, required: true },
+        power: { type: Number, required: true },
+        hull: { type: Number, required: true },
+        speed: { type:Number, required: true },
         accountId: { type: Schema.Types.ObjectId, ref: "Account", required: true },
         isSunk: { type: Boolean, default: false }
     },

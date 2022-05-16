@@ -20,6 +20,10 @@ class ShipsService
 
     async createShip(data)
     {
+        data.durability = 100;
+        data.power = 10;
+        data.hull = 5;
+        data.speed = 1;
         return await dbContext.Ships.create(data);
     }
 
