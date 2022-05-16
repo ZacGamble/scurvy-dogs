@@ -64,15 +64,18 @@ import { onMounted } from '@vue/runtime-core';
 import { combatService } from '../services/CombatService';
 import { shipsService } from '../services/ShipsService';
 import { entriesService } from '../services/EntriesService.js';
+import Loader from '../utils/Loader.js'
 export default {
 
   setup() {
     const route = useRoute()
     onMounted(async () => {
       try {
-        await entriesService.getByLobby(route.params.id)
-        await bossService.getBossById(route.params.id)
-        await shipsService.getShipsByEntry(route.params.id)
+        const loader = new Loader()
+        loader.step(entriesService.getByLobby, [route.params.id])
+        loader.step(bossService.getBossById, [route.params.id])
+        loader.step(shipsService.getShipsByEntry, [route.params.id])
+        await loader.load()
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
