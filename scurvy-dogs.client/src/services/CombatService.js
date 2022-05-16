@@ -1,6 +1,6 @@
 
 
-class combatService { 
+class CombatService { 
 
   async attack(actorId, targetId){
    
@@ -16,4 +16,4 @@ class combatService {
 
 }
 
-export const combatService = new combatService()
+export const combatService = new CombatService()
