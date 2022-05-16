@@ -1,7 +1,10 @@
 <template>
-  <header><Navbar /></header>
-  <main><router-view /></main>
-  <footer></footer>
+  <main>
+    <div class="row">
+      <div class="col-8"><router-view /></div>
+      <div class="col-4"><SideBar /></div>
+    </div>
+  </main>
 </template>
 
 <script>

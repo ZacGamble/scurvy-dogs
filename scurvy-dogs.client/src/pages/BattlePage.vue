@@ -1,16 +1,39 @@
 <template>
-  <div class="">
+  <div class="container">
     <div class="row">
-      <div class="col-md-6 p-5">
-        <img class="boss-img" src="https://thiscatdoesnotexist.com" alt="" />
-      </div>
-      <div class="col-6 side-map"><SideBar /></div>
-      <div class="col-md-8 -p-5">
-        <div class="row justify-content-around bg-dark">
-          <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-          <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-          <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-          <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
+      <div class="col">
+        <div class="row d-block">
+          <div class="col-8">
+            <img
+              class="boss-img"
+              src="https://thiscatdoesnotexist.com"
+              alt=""
+            />
+          </div>
+          <div class="col-4">
+            <div class="row justify-content-around bg-dark">
+              <img
+                class="ship-img"
+                src="https://thiscatdoesnotexist.com"
+                alt=""
+              />
+              <img
+                class="ship-img"
+                src="https://thiscatdoesnotexist.com"
+                alt=""
+              />
+              <img
+                class="ship-img"
+                src="https://thiscatdoesnotexist.com"
+                alt=""
+              />
+              <img
+                class="ship-img"
+                src="https://thiscatdoesnotexist.com"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
