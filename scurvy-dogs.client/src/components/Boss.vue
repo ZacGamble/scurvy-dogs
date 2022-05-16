@@ -55,6 +55,8 @@ export default {
       async openBattle() {
         try {
           const id = await lobbiesService.create()
+          const newEntry = {lobbyId: id, shipId: AppState.userShips[0].id};
+          AppState.activeEntry = await entriesService.create(newEntry);
           router.push({ name: 'Battle', params: { id } })
 
         } catch (error) {
