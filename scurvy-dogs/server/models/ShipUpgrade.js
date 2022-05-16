@@ -12,10 +12,18 @@ export const ShipUpgradeSchema = new Schema (
     }
 );
 
-ShipUpgradeSchema.virtual("upgrade", 
+ShipUpgradeSchema.virtual("ship", 
 {
     localField: "shipId",
     foreignField: "_id",
     ref: "Ship",
     justOne: true
+});
+
+ShipUpgradeSchema.virtual("cannons",
+{
+    localField: "upgradeId",
+    foreignField: "_id",
+    ref: "Upgrade",
+    match: {type: "cannon"}
 });
