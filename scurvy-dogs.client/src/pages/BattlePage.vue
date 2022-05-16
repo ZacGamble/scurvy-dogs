@@ -80,11 +80,12 @@ export default {
     return {
       boss: computed(() => AppState.boss),
       ships: computed(() => AppState.ships),
+      lobbyShips: computed(() => AppState.lobbyShips),
 
       async attack() {
         AppState.boss.health -= 50
         try {
-          await combatService.attack(null, boss.id)
+          await combatService.attack(AppState.activeEntry.shipId, boss.id)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

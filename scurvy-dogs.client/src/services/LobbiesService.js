@@ -4,6 +4,7 @@ import { api } from "./AxiosService";
 
 class LobbiesService {
  async create(){
+     debugger
      const res = await api.post('api/lobby')
      AppState.currentLobby = res.data
      return res.data.id
