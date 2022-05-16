@@ -11,6 +11,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .get("/ships", this.getShips)
       .get("/entries", this.getEntries)
       .get("/history", this.getHistory)
       .post("/ship", this.createShip)
@@ -25,6 +26,18 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
+
+    async getShips(req, res, next)
+    {
+        try
+        {
+            return res.send(await shipsService.getByAccount(req.userInfo.id));
+        }
+        catch(error)
+        {
+            next(error);
+        }
+    }
 
   async getEntries(req, res, next)
   {
