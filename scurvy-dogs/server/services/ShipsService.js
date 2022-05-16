@@ -6,7 +6,7 @@ class ShipsService
 {
     async getByAccount(accountId)
     {
-        return res.send(await dbContext.Ships.find({ accountId }));
+        return await dbContext.Ships.find({ accountId });
     }
 
     async getById(id)
