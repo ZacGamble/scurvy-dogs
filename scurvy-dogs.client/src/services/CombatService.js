@@ -1,11 +1,13 @@
 import { AppState } from "../AppState"
 import Pop from "../utils/Pop"
+import { api } from "./AxiosService"
 
 
 class CombatService { 
 
   async attack(actor, target) {
-    target.health -= (actor.power - .02 * target.hull) 
+    // target.health -= (actor.power - .02 * target.hull) 
+    await api.post('api/ships/' + target + '/attack', {id: actor})
   }
  
   async dodgeCalc(actor, target) {

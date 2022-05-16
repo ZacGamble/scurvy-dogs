@@ -6,8 +6,8 @@ class BossService {
 
  async getBossById(id) {
   const res = await api.get('api/lobby/' + id + '/boss')
-  logger.log('get Boss by Id!', res.data)
   AppState.boss = res.data[0]
+  logger.log('boss Service > get Boss by Id!', AppState.boss)
  }
 
  async removeBoss(id) {

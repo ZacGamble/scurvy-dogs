@@ -4,6 +4,19 @@ import { BadRequest, Forbidden } from "../utils/Errors.js";
 
 class ShipsService
 {
+    async attack(actor, targetId) {
+        const actorShip = await this.getById(actor.id)
+        if(actorShip.accountId.toString() !== actor.creatorId){
+            throw new Forbidden('Not your ship')
+        }
+        const targetShip = await dbContext.Bosses.findById(targetId)
+        if(!targetShip){
+            throw new BadRequest('Did you start your ocean yet?!')
+        }
+        targetShip.health -= actorShip.power
+        await targetShip.save()
+        return targetShip
+        }
     async getByAccount(accountId)
     {
         return await dbContext.Ships.find({ accountId });
