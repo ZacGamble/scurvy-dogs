@@ -16,8 +16,86 @@
     </div>
     <div class="offcanvas-body">
       <div>
-        Some text as placeholder. In real life you can have the elements you
-        have chosen. Like, text, images, lists, etc.
+        <div class="row d-flex m-3">
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+          <div class="col-4">
+            <div class="box">
+              <img
+                class="img-fluid"
+                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
+              />
+            </div>
+            <h6>$12</h6>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,4 +109,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.box {
+  background: #8e8574;
+  border-radius: 4px;
+  border: #c9baa1 10px solid;
+  margin: 5%;
+}
+</style>
