@@ -24,6 +24,7 @@ class ShipsService
         data.power = 10;
         data.hull = 5;
         data.speed = 1;
+        data.isSunk = false;
         return await dbContext.Ships.create(data);
     }
 

@@ -55,7 +55,6 @@ export class AccountController extends BaseController {
         try
         {
             req.body.accountId = req.userInfo.id;
-            req.body.isSunk = false;
             return res.send(await shipsService.createShip(req.body));
         }
         catch(error)

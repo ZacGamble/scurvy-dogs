@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { shipsService } from './ShipsService.js';
 
 // Private Methods
 
@@ -13,7 +14,8 @@ async function createAccountIfNeeded(account, user) {
     account = await dbContext.Account.create({
       ...user,
       subs: [user.sub]
-    })
+    });
+    await shipsService.createShip({accountId: account.id});
   }
   return account
 }
