@@ -10,7 +10,8 @@ class ShipsService {
     }
 
     async getShipsByEntry(id){
-        const res = await api.get('/:id/ships')
+        const res = await api.get('api/lobby/' + id + '/ships')
+        logger.log('ships service > get Ships By Entry > ', res.data)
     }
     async getUserShips(){
         const res = await api.get('account/ships')

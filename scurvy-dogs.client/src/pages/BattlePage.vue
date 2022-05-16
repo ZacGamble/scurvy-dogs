@@ -70,7 +70,7 @@ export default {
     onMounted(async () => {
       try {
         await bossService.getBossById(route.params.id)
-        await shipsService.getShipsByEntry()
+        await shipsService.getShipsByEntry(route.params.id)
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
