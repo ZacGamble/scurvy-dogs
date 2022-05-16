@@ -14,8 +14,17 @@ export class ShipsController extends BaseController
             .get("/:id/history", this.getHistoryById)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post("/:id/upgrade", this.addUpgrade)
+            .post('/:id/attack', this.attack)
             .put("/:id", this.edit)
             .delete("/:id", this.remove);
+    }
+   async attack(req, res, next) {
+        try {
+            req.body.creatorId = req.userInfo.id
+            return res.send(await shipsService.attack(req.body, req.params.id))
+        } catch (error) {
+            next(error)
+        }
     }
 
     async getById(req, res, next)

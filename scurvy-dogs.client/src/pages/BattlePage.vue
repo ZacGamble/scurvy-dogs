@@ -85,7 +85,7 @@ export default {
       async attack() {
         AppState.boss.health -= 50
         try {
-          await combatService.attack(AppState.activeEntry.shipId, boss.id)
+          await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
