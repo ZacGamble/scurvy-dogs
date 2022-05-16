@@ -2,7 +2,11 @@
   <nav class="sidebar px-3 text-dark">
     <header class="">
       <div class="row">
-        <div class="col-12 text-center"><h1>The Flying Dutch</h1></div>
+        <div class="col-12 text-center">
+          <!-- LOGIN COMPONENT HERE -->
+          <Login />
+          <h1>The Flying Dutch</h1>
+        </div>
         <div class="col d-flex m-3 ps-4">
           <router-link
             :to="{ name: 'Ships' }"
@@ -33,11 +37,6 @@
             <h3>Shop</h3>
           </button>
           <Shop />
-
-          <div class="" id="navbarText">
-            <!-- LOGIN COMPONENT HERE -->
-            <Login />
-          </div>
         </div>
       </div>
     </header>
