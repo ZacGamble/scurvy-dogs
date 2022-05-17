@@ -17,11 +17,12 @@ export class LobbiesController extends BaseController
             .get("/:id/ships", this.getShips)
             .get("/:id/history", this.getHistory)
             .get("/:id/boss", this.getBoss)
+            .post('/:id/boss/attack', this.bossAttack)
             .post("", this.create)
             .put("/:id", this.edit) //TODO change this once the lobby is server-sided
             .delete("/:id", this.remove);           
     }
-
+    
     async getAllLobbies(req, res, next)
     {
         try
@@ -33,7 +34,7 @@ export class LobbiesController extends BaseController
             next(error);
         }
     }
-
+    
     async getById(req, res, next)
     {
         try
@@ -45,7 +46,7 @@ export class LobbiesController extends BaseController
             next(error);
         }
     }
-
+    
     async getShips(req, res, next)
     {
         try
@@ -57,7 +58,7 @@ export class LobbiesController extends BaseController
             next(error);
         }
     }
-
+    
     async getHistory(req, res, next)
     {
         try
@@ -69,7 +70,7 @@ export class LobbiesController extends BaseController
             next(error);
         }
     }
-
+    
     async getBoss(req, res, next)
     {
         try
@@ -81,7 +82,14 @@ export class LobbiesController extends BaseController
             next(error);
         }
     }
-
+    async bossAttack(req, res, next) {
+        try {
+            return res.send(await bossesService.attack(req.params.id))
+        } catch (error) {
+            next(error)
+        }
+    }
+    
     async create(req, res, next)
     {
         try

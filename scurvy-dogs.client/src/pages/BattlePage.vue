@@ -104,6 +104,13 @@ export default {
       },
       async bossAttack() {
         AppState.userShips.durability -= AppState.boss.power
+        try {
+          await bossService.bossAttack(route.params.id)
+
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
         logger.log(AppState.userShips.durability, 'My ships durability')
       }
     }
