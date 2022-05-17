@@ -29,21 +29,21 @@
             <h6 class="m-0">
               <i class="mdi mdi-bomb fs-4"></i>
               POWER: {{ userShip.power }}
-              <div class="btn bg-dark">down</div>
-              <div class="btn" @click="upgrade('power')">up</div>
+
+              <div class="btn mdi mdi-plus" @click="upgrade('power')"></div>
             </h6>
             <p>Damage to enemies</p>
             <h6 class="m-0">
               <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
-              <div class="btn bg-dark">down</div>
-              <div class="btn" @click="upgrade('hull')">up</div>
+
+              <div class="btn mdi mdi-plus" @click="upgrade('hull')"></div>
             </h6>
             <p>Defends from attacks</p>
             <h6 class="m-0">
               <i class="mdi mdi-sail-boat fs-4"></i> Speed:
               {{ userShip.speed }}
-              <div class="btn bg-dark">down</div>
-              <div class="btn" @click="upgrade('speed')">up</div>
+
+              <div class="btn mdi mdi-plus" @click="upgrade('speed')"></div>
             </h6>
             <p>Chance of dodge</p>
           </div>
@@ -62,7 +62,7 @@ export default {
     return {
       userShip: computed(() => AppState.userShip),
       async upgrade(stat) {
-        await shipsService.upgradeStat();
+        await shipsService.upgradeStat(stat);
       },
     };
   },

@@ -21,8 +21,9 @@ class ShipsService {
     }
 
     async upgradeStat(stat) {
-        AppState.userShip.stat++
-        const res = await api.put('account/ships' + AppState.userShip)
+        AppState.points -= 1
+        AppState.userShip[stat] += 1
+        return await api.put('api/ships/' + AppState.userShip.id, AppState.userShip)
     }
 
 }

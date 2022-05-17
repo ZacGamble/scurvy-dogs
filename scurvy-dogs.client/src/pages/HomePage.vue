@@ -9,30 +9,34 @@
       </div>
     </div>
   </div>
+  <Modal id="createShipModal">
+    <template #title>
+      <h3>Create Project</h3>
+    </template>
+    <template #body>
+      <ShipForm />
+    </template>
+  </Modal>
 </template>
 
 <script>
-import { shipsService } from '../services/ShipsService';
-import { logger } from '../utils/Logger';
-import Pop from '../utils/Pop';
+import { shipsService } from "../services/ShipsService";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
 export default {
   name: "Home",
   setup() {
     return {
       async createShip() {
         try {
-          await shipsService.createShip()
+          await shipsService.createShip();
         } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
+          logger.error(error);
+          Pop.toast(error.message, "error");
         }
-      }
-    }
-  }
-
-
-
-
+      },
+    };
+  },
 };
 </script>
 
