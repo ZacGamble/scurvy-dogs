@@ -5,7 +5,7 @@ class BossesService
 {
     async getByLobbyId(lobbyId)
     {
-        return await dbContext.Bosses.find({ lobbyId });
+        return await dbContext.Bosses.findOne({ lobbyId });
     }
 
     async edit(update)
