@@ -80,6 +80,9 @@ export default {
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
         await loader.load()
+        if (!AppState.activeEntry) {
+          await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
+        }
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
