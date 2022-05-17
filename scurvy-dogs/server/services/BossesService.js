@@ -1,11 +1,24 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { shipsService } from "./ShipsService.js";
 
 class BossesService
 {
+   async attack(lobbyId) {
+        //REVIEW move this to sockets
+       const foundShips = await shipsService.getByLobby(lobbyId)
+       const bossPower = (await this.getByLobbyId(lobbyId)).power
+       for (let i = 0; i < foundShips.length; i++) {
+            const ship = foundShips[i]
+           ship.durability -= bossPower
+           await ship.save()                      
+       }
+    //    foundShips.forEach(async(s) => {s.durability -= bossPower
+    //    return await s._doc.save()})
+    }
     async getByLobbyId(lobbyId)
     {
-        return await dbContext.Bosses.find({ lobbyId });
+        return await dbContext.Bosses.findOne({ lobbyId });
     }
 
     async edit(update)

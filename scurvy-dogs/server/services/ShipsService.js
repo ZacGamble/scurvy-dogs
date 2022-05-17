@@ -34,7 +34,9 @@ class ShipsService
     async getByLobby(lobbyId)
     {
         const entries = await dbContext.Entries.find({ lobbyId }).populate("ship").populate("creator", "name picture");
-        return entries.map(entry => {return { ...entry.ship, creator: entry.creator }});
+        const ships = [] 
+        await entries.forEach(async(e) => ships.push(await dbContext.Ships.findById(e.ship.id)))
+        return ships
     }
 
     async createShip(data)
