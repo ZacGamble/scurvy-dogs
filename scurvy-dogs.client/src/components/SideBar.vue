@@ -3,7 +3,7 @@
     <header class="">
       <div class="row">
         <div class="col-12 text-center">
-          <h1>The Flying Dutch</h1>
+          <h1>{{ userShip.name }}</h1>
         </div>
         <div class="col d-flex m-3 ps-4">
           <router-link
@@ -48,15 +48,18 @@
             <div class="">
               <h6 class="m-0">
                 <i class="mdi mdi-bomb fs-4"></i>
-                POWER: 12
+                POWER: {{ userShip.power }}
               </h6>
-              <p>equipment(+7) Level(+5)</p>
-              <h6 class="m-0"><i class="mdi mdi-shield fs-4"></i> HULL: 10</h6>
-              <p>equipment(+7) Level(+3)</p>
+              <p>Damage to enemies</p>
               <h6 class="m-0">
-                <i class="mdi mdi-sail-boat fs-4"></i> Speed: 8
+                <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
               </h6>
-              <p>equipment(+4) Level(+4)</p>
+              <p>Defends from attacks</p>
+              <h6 class="m-0">
+                <i class="mdi mdi-sail-boat fs-4"></i> Speed:
+                {{ userShip.speed }}
+              </h6>
+              <p>Chance of dodge</p>
             </div>
           </div>
         </div>
@@ -103,9 +106,18 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState";
+import { watchEffect } from "@vue/runtime-core";
+import { shipsService } from "../services/ShipsService";
 export default {
   setup() {
-    return {};
+    watchEffect(async () => {
+      await shipsService.getUserShip();
+    });
+    return {
+      userShip: computed(() => AppState.userShip),
+    };
   },
 };
 </script>

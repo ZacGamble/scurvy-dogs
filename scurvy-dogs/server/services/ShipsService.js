@@ -60,6 +60,10 @@ class ShipsService
             throw new Forbidden("You do not have permission to edit this ship.");
         }
         edited.name = update.name || edited.name;
+        edited.power = update.power || edited.power;
+        edited.hull = update.hull || edited.hull;
+        edited.speed = update.speed || edited.speed;
+        
         await edited.save();
         return edited;
     }
