@@ -3,7 +3,7 @@
     <header class="">
       <div class="row">
         <div class="col-12 text-center">
-          <h1>{{ ship.name }}</h1>
+          <h1>{{ userShip.name }}</h1>
         </div>
         <div class="col d-flex m-3 ps-4">
           <router-link
@@ -115,7 +115,6 @@ export default {
     watchEffect(async () => {
       await shipsService.getUserShip();
     });
-
     return {
       userShip: computed(() => AppState.userShip),
     };
