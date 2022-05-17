@@ -23,7 +23,7 @@ class LobbiesService
     async create(data)
     {
         const newLobby = await dbContext.Lobbies.create(data);
-        await dbContext.Bosses.create({ health: 1000, creatorId: data.creatorId, lobbyId: newLobby.id });
+        await dbContext.Bosses.create({ durability: 1000, hull: 1, power: 50, speed: 1, creatorId: data.creatorId, lobbyId: newLobby.id });
         return newLobby
     }
 

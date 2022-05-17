@@ -70,6 +70,7 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async () => {
+
       try {
         const loader = new Loader()
         loader.step(entriesService.getByLobby, [route.params.id])
@@ -128,10 +129,10 @@ export default {
 .ship-img:nth-child(7) {
   animation-delay: 1.84s;
 }
-.boss-img {
-  animation: sway 0.5s alternate infinite;
-  animation-duration: 1.2s;
-}
+// .boss-img {
+//   animation: sway 0.5s alternate infinite;
+//   animation-duration: 1.2s;
+// }
 @keyframes sway {
   from {
     margin-left: 4%;
