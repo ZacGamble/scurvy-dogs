@@ -9,7 +9,7 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  :style="'width: ' + boss?.health / 10 + '%;'"
+                  :style="'width: ' + boss?.durability / 10 + '%;'"
                   aria-valuenow="100"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -89,10 +89,11 @@ export default {
     return {
       boss: computed(() => AppState.boss),
       ships: computed(() => AppState.ships),
+      userShip: computed(() => AppState.userShip),
       lobbyShips: computed(() => AppState.lobbyShips),
 
       async attack() {
-        AppState.boss.health -= AppState.activeEntry.ship.power
+        AppState.boss.durability -= AppState.activeEntry.ship.power
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
         } catch (error) {
@@ -102,12 +103,8 @@ export default {
 
       },
       async bossAttack() {
-        try {
-          await bossService.bossAttack(route.params.id)
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
+        AppState.userShips.durability -= AppState.boss.power
+        logger.log(AppState.userShips.durability, 'My ships durability')
       }
     }
   }

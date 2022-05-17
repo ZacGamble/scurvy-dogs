@@ -11,7 +11,7 @@ class BossService {
  }
 
  async bossAttack(lobbyId){
-     const res = await api.post('api/lobb/' + lobbyId + '/boss/attack')
+    //  const res = await api.post('api/lobby/' + lobbyId + '/boss/attack')
  }
 
  async removeBoss(id) {
