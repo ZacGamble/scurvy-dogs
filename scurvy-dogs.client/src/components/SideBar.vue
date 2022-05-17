@@ -49,15 +49,30 @@
               <h6 class="m-0">
                 <i class="mdi mdi-bomb fs-4"></i>
                 POWER: {{ userShip.power }}
+                <div
+                  v-if="userShip.points > 0"
+                  class="btn mdi mdi-plus bg-danger btn-sm"
+                  @click="upgrade('power')"
+                ></div>
               </h6>
               <p>Damage to enemies</p>
               <h6 class="m-0">
                 <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
+                <div
+                  v-if="userShip.points > 0"
+                  class="btn mdi mdi-plus bg-danger btn-sm"
+                  @click="upgrade('hull')"
+                ></div>
               </h6>
               <p>Defends from attacks</p>
               <h6 class="m-0">
                 <i class="mdi mdi-sail-boat fs-4"></i> Speed:
                 {{ userShip.speed }}
+                <div
+                  v-if="userShip.points > 0"
+                  class="btn mdi mdi-plus bg-danger btn-sm"
+                  @click="upgrade('speed')"
+                ></div>
               </h6>
               <p>Chance of dodge</p>
             </div>
@@ -117,6 +132,10 @@ export default {
     });
     return {
       userShip: computed(() => AppState.userShip),
+      userShip: computed(() => AppState.userShip),
+      async upgrade(stat) {
+        await shipsService.upgradeStat(stat);
+      },
     };
   },
 };
