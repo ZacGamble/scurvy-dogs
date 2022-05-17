@@ -1,4 +1,3 @@
-import res from "express/lib/response";
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
 
@@ -19,7 +18,7 @@ class ShipsService
         }
     async getByAccount(accountId)
     {
-        return await dbContext.Ships.find({ accountId });
+        return await dbContext.Ships.findOne({ accountId });
     }
 
     async getById(id)
@@ -39,6 +38,11 @@ class ShipsService
 
     async createShip(data)
     {
+        const accountShipCount = (await dbContext.Ships.find({ accountId: data.accountId })).length;
+        if(accountShipCount >= 1)
+        {
+            throw new BadRequest("You already have a ship.");
+        }
         data.durability = 100;
         data.power = 10;
         data.hull = 5;
