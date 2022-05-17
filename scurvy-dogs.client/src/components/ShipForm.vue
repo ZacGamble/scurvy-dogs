@@ -29,6 +29,34 @@
             required
           />
         </div>
+        <div class="mb-3">
+          <label for="hull" class="form-label"></label>
+          <input
+            type="number"
+            class="form-control"
+            name="hull"
+            id="hull"
+            aria-describedby="helpId"
+            min="1"
+            max="5"
+            v-model="editable.hull"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="speed" class="form-label"></label>
+          <input
+            type="number"
+            class="form-control"
+            name="speed"
+            id="speed"
+            aria-describedby="helpId"
+            min="1"
+            max="5"
+            v-model="editable.speed"
+            required
+          />
+        </div>
         <button class="btn btn-info w-50 mt-3" type="submit">Submit</button>
       </form>
     </div>
@@ -36,9 +64,28 @@
 </template>
 
 <script>
+import { Modal } from "bootstrap";
+import { shipsService } from "../services/ShipsService";
+import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
+import { ref } from "@vue/reactivity";
 export default {
   setup() {
-    return {};
+    const editable = ref({});
+    return {
+      editable,
+      async create() {
+        try {
+          await shipsService.createShip(editable.value);
+          Modal.getOrCreateInstance(
+            document.getElementById("createShipModal")
+          ).toggle();
+        } catch (error) {
+          console.error("[error prefix]", error.message);
+          Pop.toast(error.message, "error");
+        }
+      },
+    };
   },
 };
 </script>

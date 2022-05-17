@@ -2,8 +2,13 @@
   <div class="">
     <div class="row">
       <div class="col-md-8">
-        <button @click="createShip()" class="btn btn-secondary">
-          <h3>Create Ship</h3>
+        <Login />
+        <button
+          class="btn bg-black text-light"
+          type="button"
+          @click="openModal()"
+        >
+          create Ship
         </button>
         <Boss />
       </div>
@@ -11,7 +16,7 @@
   </div>
   <Modal id="createShipModal">
     <template #title>
-      <h3>Create Project</h3>
+      <h3>Create Ship</h3>
     </template>
     <template #body>
       <ShipForm />
@@ -20,6 +25,7 @@
 </template>
 
 <script>
+import { Modal } from "bootstrap";
 import { shipsService } from "../services/ShipsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
@@ -27,6 +33,12 @@ export default {
   name: "Home",
   setup() {
     return {
+      openModal() {
+        document.getElementById("shipForm").reset();
+        Modal.getOrCreateInstance(
+          document.getElementById("createShipModal")
+        ).toggle();
+      },
       async createShip() {
         try {
           await shipsService.createShip();
