@@ -57,7 +57,7 @@ export default {
       async openBattle() {
         try {
           const id = await lobbiesService.create()
-          const newEntry = { lobbyId: id, shipId: AppState.userShips[0].id };
+          const newEntry = { lobbyId: id, shipId: AppState.userShips.id };
           await entriesService.create(newEntry);
           router.push({ name: 'Battle', params: { id } })
 

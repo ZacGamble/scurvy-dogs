@@ -10,6 +10,10 @@ class BossService {
   logger.log('boss Service > get Boss by Id!', AppState.boss)
  }
 
+ async bossAttack(lobbyId){
+     const res = await api.post('api/lobb/' + lobbyId + '/boss/attack')
+ }
+
  async removeBoss(id) {
   const res = await api.delete('api/boss/' + id)
   logger.log('get Boss by Id!', res.data)

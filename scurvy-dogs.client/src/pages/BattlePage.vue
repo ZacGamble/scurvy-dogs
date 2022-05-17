@@ -21,6 +21,9 @@
                 alt=""
               />
               <button @click="attack()" class="btn btn-danger">ATTACK</button>
+              <button @click="bossAttack()" class="btn btn-warning">
+                Boss Attack
+              </button>
             </div>
           </div>
           <div class="col-4">
@@ -97,6 +100,14 @@ export default {
           Pop.toast(error.message, 'error')
         }
 
+      },
+      async bossAttack() {
+        try {
+          await bossService.bossAttack(route.params.id)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
       }
     }
   }
