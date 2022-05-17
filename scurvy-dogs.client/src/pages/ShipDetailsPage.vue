@@ -1,43 +1,51 @@
 <template>
-  <div class="container-fluid">
+  <header class="">
     <div class="row">
-      <div class="col-md-6">
-        <div class="d-flex justify-content-center p-3 rounded">
-          <img
-            src="https://images.unsplash.com/photo-1474224348275-dd142b14f8c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcCUyMGh1bGx8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-            alt="ship hull"
-            class="img-clamp"
-          />
-        </div>
+      <div class="col-12 text-center">
+        <h1>{{ userShip.name }}</h1>
       </div>
-      <div class="col-md-3">
-        <div class="py-3">
-          Ship stats:
-          <ul>
-            <li>Speed: 7 knots</li>
-            <li>Attack: 3</li>
-            <li>Finishing blows: 2</li>
-            <li>Wins: 0</li>
-          </ul>
-        </div>
+      <div class="col d-flex m-3 ps-4">
+        <button
+          class="btn text-dark btn-info selectable mx-2"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample"
+        >
+          <h3>Shop</h3>
+        </button>
+        <Shop />
       </div>
-
-      <div class="col-md-3 py-3">
-        Upgrades
-        <div class="row">
-          <div class="col-6 my-3">
-            <div class="p-3 bg-secondary">Hull</div>
-          </div>
-          <div class="col-6 my-3">
-            <div class="p-3 bg-secondary">Cannons</div>
-          </div>
+    </div>
+  </header>
+  <div class="row d-block">
+    <div class="col">
+      <div class="row d-flex">
+        <div class="col-6">
+          <img class="img-fluid" src="src/assets/img/yellow-ship-sea.svg" />
         </div>
-        <div class="row">
-          <div class="col-6 my-3">
-            <div class="p-3 bg-secondary">Sails</div>
-          </div>
-          <div class="col-6 my-3">
-            <div class="p-3 bg-secondary">Crew</div>
+        <div class="col-6">
+          <div class="">
+            <h6 class="m-0">
+              <i class="mdi mdi-bomb fs-4"></i>
+              POWER: {{ userShip.power }}
+              <div class="btn bg-dark">down</div>
+              <div class="btn" @click="upgrade('power')">up</div>
+            </h6>
+            <p>Damage to enemies</p>
+            <h6 class="m-0">
+              <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
+              <div class="btn bg-dark">down</div>
+              <div class="btn" @click="upgrade('hull')">up</div>
+            </h6>
+            <p>Defends from attacks</p>
+            <h6 class="m-0">
+              <i class="mdi mdi-sail-boat fs-4"></i> Speed:
+              {{ userShip.speed }}
+              <div class="btn bg-dark">down</div>
+              <div class="btn" @click="upgrade('speed')">up</div>
+            </h6>
+            <p>Chance of dodge</p>
           </div>
         </div>
       </div>
@@ -45,19 +53,55 @@
   </div>
 </template>
 
-
 <script>
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState";
+import { shipsService } from "../services/ShipsService";
 export default {
   setup() {
-    return {}
-  }
-}
+    return {
+      userShip: computed(() => AppState.userShip),
+      async upgrade(stat) {
+        await shipsService.upgradeStat();
+      },
+    };
+  },
+};
 </script>
 
-
 <style lang="scss" scoped>
-.img-clamp {
-  max-width: 100%;
-  height: auto;
+a:hover {
+  text-decoration: none;
+}
+.nav-link {
+  text-transform: uppercase;
+}
+.navbar-nav .router-link-exact-active {
+  border-bottom: 2px solid var(--bs-success);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.sidebar {
+  border: black 2px solid;
+  height: 100%;
+  background-color: #e8d8bd;
+}
+
+.box {
+  background: #8e8574;
+  border-radius: 4px;
+  border: #c9baa1 10px solid;
+}
+
+h6 {
+  background: #8e8574;
+}
+
+p {
+  background: #c9baa1;
+}
+
+.equipment {
+  margin-bottom: 1em;
 }
 </style>
