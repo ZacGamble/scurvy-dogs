@@ -16,7 +16,7 @@
   </div>
   <Modal id="createShipModal">
     <template #title>
-      <h3>Create Ship</h3>
+      <h3>Name Ye Ship!</h3>
     </template>
     <template #body>
       <ShipForm />

@@ -9,7 +9,11 @@ export const ShipSchema = new Schema (
         hull: { type: Number, required: true },
         speed: { type:Number, required: true },
         accountId: { type: Schema.Types.ObjectId, ref: "Account", required: true },
-        isSunk: { type: Boolean, default: false }
+        isSunk: { type: Boolean, default: false },
+        build: { type: String },
+        img: { type:String }
+
+
     },
     {
         timestamps: true,

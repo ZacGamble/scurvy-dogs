@@ -5,7 +5,9 @@ import { api } from "./AxiosService"
 class ShipsService {
    async createShip(body){
     const res = await api.post('account/ship', body)
-    AppState.ships.push(res.body)
+       AppState.ships.push(res.body)
+       const account = AppState.account.points += 10
+       await api.put('account' ,account)
     logger.log(res.body)
     }
 

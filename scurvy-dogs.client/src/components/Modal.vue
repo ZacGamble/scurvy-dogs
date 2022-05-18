@@ -1,7 +1,7 @@
 <template>
   <div class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content bg-info">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
             <slot name="title"></slot>
