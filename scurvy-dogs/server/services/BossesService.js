@@ -33,7 +33,7 @@ class BossesService
         // {
         //     throw new Forbidden("You do not have permission to edit this boss.");
         // }
-        edited.durability = update.durability || edited.durability;
+        edited.durability = typeof update.durability === "number" ? update.durability : edited.durability;
         if(edited.durability <= 0){
             edited.isDefeated = true
             await lobbiesService.remove(edited.lobbyId)
