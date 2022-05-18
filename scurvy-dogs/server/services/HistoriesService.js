@@ -37,6 +37,7 @@ class HistoriesService
         {
             history.largestHit = damage;
         }
+        await history.save();
     }
     
     async addDamageTaken(data, damage)
