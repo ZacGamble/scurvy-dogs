@@ -9,7 +9,7 @@ class ShipsService
         if(actorShip.accountId.toString() !== actor.creatorId){
             throw new Forbidden('Not your ship')
         }
-        const targetShip = await dbContext.Bosses.findOne({targetId})
+        const targetShip = await dbContext.Bosses.findOne({_id: targetId})
         if(!targetShip){
             throw new BadRequest('Did you start your ocean yet?!')
         }
