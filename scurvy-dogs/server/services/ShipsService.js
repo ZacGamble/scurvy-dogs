@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { bossesService } from "./BossesService.js";
 
 class ShipsService
 {
@@ -12,8 +13,10 @@ class ShipsService
         if(!targetShip){
             throw new BadRequest('Did you start your ocean yet?!')
         }
-        targetShip.durability -= actorShip.power
-        await targetShip.save()
+        const update = {}
+        update.id = targetId
+        update.durability = targetShip.durability - actorShip.power
+        await bossesService.edit(update)
         return targetShip
         }
     async getByAccount(accountId)
