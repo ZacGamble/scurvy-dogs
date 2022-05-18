@@ -1,5 +1,6 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { bossesService } from "../services/BossesService.js";
+import { entriesService } from "../services/EntriesService.js";
 import { historiesService } from "../services/HistoriesService.js";
 import { lobbiesService } from "../services/LobbiesService.js";
 import { shipsService } from "../services/ShipsService.js";
@@ -17,6 +18,7 @@ export class LobbiesController extends BaseController
             .get("/:id/ships", this.getShips)
             .get("/:id/history", this.getHistory)
             .get("/:id/boss", this.getBoss)
+            .get("/:id/entries", this.getEntries)
             .post('/:id/boss/attack', this.bossAttack)
             .post("", this.create)
             .put("/:id", this.edit) //TODO change this once the lobby is server-sided
@@ -80,6 +82,13 @@ export class LobbiesController extends BaseController
         catch(error)
         {
             next(error);
+        }
+    }
+    async getEntries(req, res, next){
+        try {
+            return res.send(await entriesService.getByLobby(req.params.id));
+        } catch (error) {
+            next(error)
         }
     }
     async bossAttack(req, res, next) {

@@ -25,14 +25,15 @@ export class EntriesController extends BaseController
             next(error);
         }
     }
-
     async getByLobby(req, res, next){
         try {
-            return res.send(await entriesService.getByLobby(req.params.id));
+            return res.send(await entriesService.getByUserAndLobby(req.params.id, req.userInfo.id));
         } catch (error) {
             next(error)
         }
     }
+
+ 
     async create(req, res, next)
     {
         try

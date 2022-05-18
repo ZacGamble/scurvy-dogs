@@ -12,7 +12,6 @@ class EntriesService
     async getByLobby(lobbyId) {
        const res =  await api.get('api/entries/' + lobbyId)
        AppState.activeEntry = res.data
-
     }
 }
 
