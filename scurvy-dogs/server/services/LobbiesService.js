@@ -39,13 +39,13 @@ class LobbiesService
         return edited;
     }
 
-    async remove(id, userId)
+    async remove(id) //userId)
     {
         const removed = await this.getById(id);
-        if(removed.creatorId.toString() != userId)
-        {
-            throw new Forbidden("You do not have permission to end this lobby.");
-        }
+        // if(removed.creatorId.toString() != userId)
+        // {
+        //     throw new Forbidden("You do not have permission to end this lobby.");
+        // }
         removed.isFinished = true;
         await removed.save();
         entriesService.removeByLobby(id);

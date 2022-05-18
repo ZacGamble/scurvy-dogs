@@ -22,7 +22,7 @@ export class LobbiesController extends BaseController
             .post('/:id/boss/attack', this.bossAttack)
             .post("", this.create)
             .put("/:id", this.edit) //TODO change this once the lobby is server-sided
-            .delete("/:id", this.remove);           
+            // .delete("/:id", this.remove);           
     }
     
     async getAllLobbies(req, res, next)
@@ -128,15 +128,15 @@ export class LobbiesController extends BaseController
         }
     }
 
-    async remove(req, res, next)
-    {
-        try
-        {
-            return res.send(await lobbiesService.remove(req.params.id, req.userInfo.id));
-        }
-        catch(error)
-        {
-            next(error);
-        }
-    }
+    // async remove(req, res, next)
+    // {
+    //     try
+    //     {
+    //         return res.send(await lobbiesService.remove(req.params.id, req.userInfo.id));
+    //     }
+    //     catch(error)
+    //     {
+    //         next(error);
+    //     }
+    // }
 }
