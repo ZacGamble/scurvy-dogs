@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { historiesService } from "./HistoriesService.js";
 import { lobbiesService } from "./LobbiesService.js";
 import { shipsService } from "./ShipsService.js";
 
@@ -12,6 +13,7 @@ class BossesService
        for (let i = 0; i < foundShips.length; i++) {
             const ship = foundShips[i]
            ship.durability -= bossPower
+           await historiesService.addDamageTaken({accountId: ship.creatorId, shipId: ship.id, lobbyId});
            await ship.save()                      
        }
     //    foundShips.forEach(async(s) => {s.durability -= bossPower

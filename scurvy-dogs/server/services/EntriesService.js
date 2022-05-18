@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { historiesService } from "./HistoriesService.js";
 import { lobbiesService } from "./LobbiesService.js";
 import { shipsService } from "./ShipsService.js";
 
@@ -25,6 +26,7 @@ class EntriesService
             throw new BadRequest("That lobby is already over.");
         }
         const newEntry =  await dbContext.Entries.create(data);
+        await historiesService.create(data.accountId, data.shipId, data.lobbyId);
         await newEntry.populate('ship')
         return newEntry
     }
