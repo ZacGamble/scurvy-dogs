@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-md-8">
         <Login />
-        <button
+        <!-- <button
           class="btn bg-black text-light"
           type="button"
           @click="openModal()"
         >
           create Ship
-        </button>
+        </button> -->
         <Boss />
       </div>
     </div>
@@ -29,16 +29,30 @@ import { Modal } from "bootstrap";
 import { shipsService } from "../services/ShipsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
+import { computed, onMounted, watch } from '@vue/runtime-core';
+import { AppState } from '../AppState.js';
 export default {
   name: "Home",
   setup() {
-    return {
-      openModal() {
+    onMounted(() => {
+      shipsService.getUserShip()
+      if (AppState.userShip = {}) {
+
+
         document.getElementById("shipForm").reset();
         Modal.getOrCreateInstance(
           document.getElementById("createShipModal")
         ).toggle();
-      },
+
+
+
+
+      }
+
+    })
+    userShip: computed(() => AppState.userShip)
+    return {
+
       async createShip() {
         try {
           await shipsService.createShip();
