@@ -34,8 +34,8 @@ import { AppState } from '../AppState.js';
 export default {
   name: "Home",
   setup() {
-    onMounted(() => {
-      shipsService.getUserShip()
+    onMounted(async () => {
+      await shipsService.getUserShip()
       if (AppState.userShip = {}) {
 
 
