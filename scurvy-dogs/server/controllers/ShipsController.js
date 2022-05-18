@@ -20,7 +20,7 @@ export class ShipsController extends BaseController
     }
    async attack(req, res, next) {
         try {
-            req.body.creatorId = req.userInfo.id
+            req.body.accountId = req.userInfo.id
             return res.send(await shipsService.attack(req.body, req.params.id))
         } catch (error) {
             next(error)

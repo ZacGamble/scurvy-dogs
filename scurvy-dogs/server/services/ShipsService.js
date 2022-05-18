@@ -7,7 +7,7 @@ class ShipsService
 {
     async attack(actor, targetId) {
         const actorShip = await this.getById(actor.id)
-        if(actorShip.accountId.toString() !== actor.creatorId){
+        if(actorShip.accountId.toString() !== actor.accountId){
             throw new Forbidden('Not your ship')
         }
         const targetShip = await dbContext.Bosses.findOne({_id: targetId})
