@@ -12,7 +12,8 @@
         <h4 class="mt-3">Mango Mangler</h4>
       </span>
       <h5 class="ps-5 mb-4">
-        Diffictuly: <i class="mdi mdi-star"></i>
+        Diffictuly:
+        <i class="mdi mdi-star"></i>
         <i class="mdi mdi-star"></i>
         <i class="mdi mdi-star"></i>
       </h5>
@@ -55,6 +56,10 @@ export default {
   setup() {
     return {
       async openBattle() {
+        if (AppState.userShip.accountId != AppState.account.id) {
+          Pop.toast('Ye must first acquire a ship!', 'warning')
+          return
+        }
         try {
           const id = await lobbiesService.create()
           const newEntry = { lobbyId: id, shipId: AppState.userShip.id };
