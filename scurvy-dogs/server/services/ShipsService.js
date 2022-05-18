@@ -33,8 +33,13 @@ class ShipsService
 
     async getByLobby(lobbyId)
     {
-        const entries = await dbContext.Entries.find({ lobbyId }).populate("ship").populate("creator", "name picture");
-        return entries.map(entry => {return { ...entry.ship, creator: entry.creator }});
+        const entries = await dbContext.Entries.find({ lobbyId })
+        const ships = [] 
+        for (let i = 0; i < entries.length; i++) {
+            const ship = entries[i];
+            ships.push(await dbContext.Ships.findById(ship.shipId))   
+        }
+        return ships
     }
 
     async createShip(data)
@@ -47,7 +52,7 @@ class ShipsService
         data.durability = 100;
         data.power = 10;
         data.hull = 5;
-        data.speed = 1;
+        data.speed = 5;
         data.isSunk = false;
         return await dbContext.Ships.create(data);
     }

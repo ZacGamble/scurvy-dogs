@@ -9,7 +9,7 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  :style="'width: ' + boss?.health / 10 + '%;'"
+                  :style="'width: ' + boss?.durability / 10 + '%;'"
                   aria-valuenow="100"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -81,6 +81,9 @@ export default {
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
         await loader.load()
+        if (!AppState.activeEntry) {
+          await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
+        }
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')

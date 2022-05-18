@@ -42,11 +42,11 @@
       <div class="col">
         <div class="row d-flex">
           <div class="col-6">
-            <img class="img-fluid" src="src/assets/img/yellow-ship-sea.svg" />
+            <img class="img-fluid" :src="userShip.img" />
           </div>
           <div class="col-6">
             <div class="">
-              <h6>{{ points }}</h6>
+              <h6>{{ account.points }}</h6>
               <h6 class="m-0">
                 <i class="mdi mdi-bomb fs-4"></i>
                 POWER: {{ userShip.power }}
@@ -124,15 +124,11 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
-import { watchEffect } from "@vue/runtime-core";
 import { shipsService } from "../services/ShipsService";
 export default {
   setup() {
-    watchEffect(async () => {
-      await shipsService.getUserShip();
-    });
     return {
-      points: computed(() => AppState.points),
+      account: computed(() => AppState.account),
       userShip: computed(() => AppState.userShip),
       userShip: computed(() => AppState.userShip),
       async upgrade(stat) {
