@@ -28,6 +28,7 @@
           </div>
           <div class="col-4">
             <div class="row justify-content-around bg-dark">
+              <h2 id="dmg" class="dmg"></h2>
               <img
                 class="ship-img"
                 src="https://thiscatdoesnotexist.com"
@@ -93,25 +94,22 @@ export default {
       boss: computed(() => AppState.boss),
       ships: computed(() => AppState.ships),
       lobbyShips: computed(() => AppState.lobbyShips),
+      attackPower: computed(() => AppState.userShip.power),
 
       async attack() {
         AppState.boss.durability -= AppState.activeEntry.ship.power
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
+
+          document.getElementById("dmg").innerHTML = this.attackPower
+
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
 
       },
-      async bossAttack() {
-        try {
-          await bossService.bossAttack(route.params.id)
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      }
+
     }
   }
 }
@@ -143,10 +141,30 @@ export default {
 .ship-img:nth-child(7) {
   animation-delay: 1.84s;
 }
+
+.dmg {
+  animation-fill-mode: forwards;
+  animation: dmg 5s;
+}
+
 // .boss-img {
 //   animation: sway 0.5s alternate infinite;
 //   animation-duration: 1.2s;
 // }
+
+@keyframes dmg {
+  from {
+    color: rgba($color: #e21717, $alpha: 0);
+  }
+
+  50% {
+    color: rgba($color: #e91414, $alpha: 1);
+  }
+  to {
+    color: rgba($color: #e91414, $alpha: 0);
+  }
+}
+
 @keyframes sway {
   from {
     margin-left: 4%;
