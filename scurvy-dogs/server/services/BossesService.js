@@ -29,10 +29,10 @@ class BossesService
         {
             throw new BadRequest("Could not find a boss with that id.");
         }
-        if(edited.creatorId.toString !== update.creatorId)
-        {
-            throw new Forbidden("You do not have permission to edit this boss.");
-        }
+        // if(edited.creatorId.toString !== update.creatorId)
+        // {
+        //     throw new Forbidden("You do not have permission to edit this boss.");
+        // }
         edited.durability = update.durability || edited.durability;
         if(edited.durability <= 0){
             edited.isDefeated = true
