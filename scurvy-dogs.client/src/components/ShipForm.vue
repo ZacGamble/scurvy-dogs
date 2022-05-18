@@ -79,7 +79,7 @@ export default {
             document.getElementById("createShipModal")
           ).toggle();
         } catch (error) {
-          console.error("[error prefix]", error.message);
+          logger.error(error);
           Pop.toast(error.message, "error");
         }
       },
