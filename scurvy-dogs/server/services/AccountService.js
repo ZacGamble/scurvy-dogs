@@ -15,7 +15,6 @@ async function createAccountIfNeeded(account, user) {
       ...user,
       subs: [user.sub]
     });
-    await shipsService.createShip({accountId: account.id});
   }
   return account
 }

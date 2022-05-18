@@ -3,10 +3,12 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class ShipsService {
-   async createShip(){
-    const res = await api.post('account/ship')
-    AppState.ships.push(res.data)
-    logger.log(res.data)
+   async createShip(body){
+    const res = await api.post('account/ship', body)
+       AppState.ships.push(res.body)
+       const account = AppState.account.points += 10
+       await api.put('account' ,account)
+    logger.log(res.body)
     }
 
     async getShipsByEntry(id){

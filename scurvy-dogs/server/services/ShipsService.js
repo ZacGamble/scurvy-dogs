@@ -52,7 +52,7 @@ class ShipsService
         data.durability = 100;
         data.power = 10;
         data.hull = 5;
-        data.speed = 1;
+        data.speed = 5;
         data.isSunk = false;
         return await dbContext.Ships.create(data);
     }
