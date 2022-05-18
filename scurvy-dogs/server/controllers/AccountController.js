@@ -15,7 +15,7 @@ export class AccountController extends BaseController {
       .get("/entries", this.getEntries)
       .get("/history", this.getHistory)
       .post("/ship", this.createShip)
-      .put("", this.edit)
+      .put('', this.edit)
   }
 
   async getUserAccount(req, res, next) {
