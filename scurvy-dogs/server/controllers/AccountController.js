@@ -9,13 +9,13 @@ export class AccountController extends BaseController {
   constructor() {
     super('account')
     this.router
-      .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('', this.getUserAccount)
-      .get("/ships", this.getShips)
-      .get("/entries", this.getEntries)
-      .get("/history", this.getHistory)
-      .post("/ship", this.createShip)
-      .put('', this.edit)
+    .use(Auth0Provider.getAuthorizedUserInfo)
+    .get('', this.getUserAccount)
+    .get("/ships", this.getShips)
+    .get("/entries", this.getEntries)
+    .get("/history", this.getHistory)
+    .post("/ship", this.createShip)
+    .put('', this.edit)
   }
 
   async getUserAccount(req, res, next) {
@@ -80,7 +80,7 @@ export class AccountController extends BaseController {
   {
      try
      {
-        return res.send(await accountService.updateAccount(req.body));
+        return res.send(await accountService.updateAccount(req.userInfo, req.body));
      }
      catch(error)
      {

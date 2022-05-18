@@ -25,23 +25,24 @@ class HistoriesService
 
     async addDamageDone(data, damage)
     {
-        const history = await dbContext.Histories.findOne({accountId: data.creatorId, shipId: data.id, lobbyId: data.lobbyId});
+        const history = await dbContext.Histories.findOne({accountId: data.accountId, shipId: data.shipId, lobbyId: data.lobbyId});
         history.damageDone += damage;
         await history.save();
     }
     
     async checkLargestDamage(data, damage)
     {
-        const history = await dbContext.Histories.findOne({accountId: data.creatorId, shipId: data.id, lobbyId: data.lobbyId});
+        const history = await dbContext.Histories.findOne({accountId: data.accountId, shipId: data.shipId, lobbyId: data.lobbyId});
         if(history.largestHit < damage)
         {
             history.largestHit = damage;
         }
+        await history.save();
     }
     
     async addDamageTaken(data, damage)
     {
-        const history = await dbContext.Histories.findOne({accountId: data.creatorId, shipId: data.id, lobbyId: data.lobbyId});
+        const history = await dbContext.Histories.findOne({accountId: data.accountId, shipId: data.shipId, lobbyId: data.lobbyId});
         history.damageTaken += damage;
         await history.save();
     }
