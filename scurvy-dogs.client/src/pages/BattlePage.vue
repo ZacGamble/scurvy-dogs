@@ -95,7 +95,7 @@ export default {
       lobbyShips: computed(() => AppState.lobbyShips),
 
       async attack() {
-        AppState.boss.health -= AppState.activeEntry.ship.power
+        AppState.boss.durability -= AppState.activeEntry.ship.power
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
         } catch (error) {
