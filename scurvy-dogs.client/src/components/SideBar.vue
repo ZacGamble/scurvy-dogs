@@ -134,6 +134,7 @@ export default {
       userShip: computed(() => AppState.userShip),
       async upgrade(stat) {
         await shipsService.upgradeStat(stat);
+        AppState.account.points -= 1;
         await accountService.editAccount(AppState.account);
       },
     };

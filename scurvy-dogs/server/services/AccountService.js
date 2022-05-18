@@ -39,6 +39,7 @@ function sanitizeBody(body) {
   const writable = {
     name: body.name,
     picture: body.picture,
+    points: body.points,
     newAccount: body.newAccount
   }
   return writable

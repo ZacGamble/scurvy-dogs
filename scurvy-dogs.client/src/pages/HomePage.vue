@@ -29,29 +29,27 @@ import { Modal } from "bootstrap";
 import { shipsService } from "../services/ShipsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
-import { computed, onMounted, watch } from '@vue/runtime-core';
-import { AppState } from '../AppState.js';
+import { computed, onMounted, watch, watchEffect } from "@vue/runtime-core";
+import { AppState } from "../AppState.js";
+import { accountService } from "../services/AccountService";
 export default {
   name: "Home",
   setup() {
+    const openModal = async () => {
+      document.getElementById("shipForm").reset();
+      Modal.getOrCreateInstance(
+        document.getElementById("createShipModal")
+      ).toggle();
+    };
     onMounted(async () => {
-      await shipsService.getUserShip()
-      if (AppState.userShip = {}) {
-
-
-        document.getElementById("shipForm").reset();
-        Modal.getOrCreateInstance(
-          document.getElementById("createShipModal")
-        ).toggle();
-
-
-
-
+      if (AppState.userShip == "") {
+        logger.log(AppState.userShip);
+        openModal();
       }
+    });
 
-    })
-    userShip: computed(() => AppState.userShip)
     return {
+      userShip: computed(() => AppState.userShip),
 
       async createShip() {
         try {
