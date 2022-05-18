@@ -124,13 +124,9 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
-import { watchEffect } from "@vue/runtime-core";
 import { shipsService } from "../services/ShipsService";
 export default {
   setup() {
-    watchEffect(async () => {
-      await shipsService.getUserShip();
-    });
     return {
       account: computed(() => AppState.account),
       userShip: computed(() => AppState.userShip),
