@@ -13,7 +13,7 @@ class BossesService
        for (let i = 0; i < foundShips.length; i++) {
             const ship = foundShips[i]
            ship.durability -= bossPower
-           await historiesService.addDamageTaken({accountId: ship.creatorId, shipId: ship.id, lobbyId});
+           await historiesService.addDamageTaken({accountId: ship.accountId, shipId: ship.id, lobbyId}, bossPower);
            await ship.save()                      
        }
     //    foundShips.forEach(async(s) => {s.durability -= bossPower
