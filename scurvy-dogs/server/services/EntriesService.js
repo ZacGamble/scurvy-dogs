@@ -31,8 +31,8 @@ class EntriesService
         const removed = await dbContext.Entries.find({ lobbyId });
         removed.forEach(entry => entry.remove());
     }
-    async getByLobby(data) {
-        return await dbContext.Entries.findOne({accountId : data.accountId, lobbyId : data.lobbyId}).populate('ship')
+    async getByLobby(lobbyId) {
+        return await dbContext.Entries.find({ lobbyId }).populate('ship')
     }
 }
 

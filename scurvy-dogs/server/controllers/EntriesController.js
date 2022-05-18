@@ -28,9 +28,7 @@ export class EntriesController extends BaseController
 
     async getByLobby(req, res, next){
         try {
-            req.body.accountId = req.userInfo.id
-            req.body.lobbyId = req.params.id
-            return res.send(await entriesService.getByLobby(req.body))
+            return res.send(await entriesService.getByLobby(req.params.id));
         } catch (error) {
             next(error)
         }
