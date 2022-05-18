@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { historiesService } from "./HistoriesService.js";
 import { lobbiesService } from "./LobbiesService.js";
 import { shipsService } from "./ShipsService.js";
 
@@ -12,6 +13,7 @@ class BossesService
        for (let i = 0; i < foundShips.length; i++) {
             const ship = foundShips[i]
            ship.durability -= bossPower
+           await historiesService.addDamageTaken({accountId: ship.accountId, shipId: ship.id, lobbyId}, bossPower);
            await ship.save()                      
        }
     //    foundShips.forEach(async(s) => {s.durability -= bossPower
@@ -33,7 +35,7 @@ class BossesService
         // {
         //     throw new Forbidden("You do not have permission to edit this boss.");
         // }
-        edited.durability = update.durability || edited.durability;
+        edited.durability = typeof update.durability === "number" ? update.durability : edited.durability;
         if(edited.durability <= 0){
             edited.isDefeated = true
             await lobbiesService.remove(edited.lobbyId)

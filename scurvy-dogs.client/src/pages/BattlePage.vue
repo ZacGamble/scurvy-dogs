@@ -99,7 +99,7 @@ export default {
       async attack() {
         AppState.boss.durability -= AppState.activeEntry.ship.power
         try {
-          await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
+          await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id, route.params.id)
 
           document.getElementById("dmg").innerHTML = this.attackPower
 

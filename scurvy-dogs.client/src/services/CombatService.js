@@ -5,9 +5,9 @@ import { api } from "./AxiosService"
 
 class CombatService { 
 
-  async attack(actor, target) {
+  async attack(actor, target, lobbyId) {
     // target.health -= (actor.power - .02 * target.hull) 
-    await api.post('api/ships/' + target + '/attack', {id: actor})
+    await api.post('api/ships/' + target + '/attack', {id: actor, lobbyId})
   }
  
   async dodgeCalc(actor, target) {
