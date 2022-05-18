@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
+import { lobbiesService } from "./LobbiesService.js";
 import { shipsService } from "./ShipsService.js";
 
 class BossesService
@@ -32,7 +33,11 @@ class BossesService
         {
             throw new Forbidden("You do not have permission to edit this boss.");
         }
-        edited.health = update.health || edited.health;
+        edited.durability = update.durability || edited.durability;
+        if(edited.durability <= 0){
+            edited.isDefeated = true
+            await lobbiesService.remove(edited.lobbyId)
+        }
         await edited.save()
         return edited;
     }

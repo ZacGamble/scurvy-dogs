@@ -8,11 +8,11 @@ class ShipsService
         if(actorShip.accountId.toString() !== actor.creatorId){
             throw new Forbidden('Not your ship')
         }
-        const targetShip = await dbContext.Bosses.findById(targetId)
+        const targetShip = await dbContext.Bosses.findOne({targetId})
         if(!targetShip){
             throw new BadRequest('Did you start your ocean yet?!')
         }
-        targetShip.health -= actorShip.power
+        targetShip.durability -= actorShip.power
         await targetShip.save()
         return targetShip
         }
