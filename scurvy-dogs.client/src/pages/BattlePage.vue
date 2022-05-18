@@ -109,7 +109,14 @@ export default {
         }
 
       },
-
+      async bossAttack() {
+        try {
+          await bossService.bossAttack(route.params.id)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }
