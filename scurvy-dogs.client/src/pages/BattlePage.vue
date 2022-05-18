@@ -9,7 +9,7 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  :style="'width: ' + boss?.health / 10 + '%;'"
+                  :style="'width: ' + boss?.durability / 10 + '%;'"
                   aria-valuenow="100"
                   aria-valuemin="0"
                   aria-valuemax="100"
