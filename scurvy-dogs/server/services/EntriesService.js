@@ -5,6 +5,9 @@ import { shipsService } from "./ShipsService.js";
 
 class EntriesService
 {
+   async getByUserAndLobby(lobbyId, accountId) {
+    return await dbContext.Entries.findOne({ accountId, lobbyId }).populate('ship')
+    }
     async getByAccount(accountId)
     {
         return await dbContext.Entries.find({ accountId }).populate('ship');

@@ -97,7 +97,7 @@ export default {
       attackPower: computed(() => AppState.userShip.power),
 
       async attack() {
-        AppState.boss.health -= AppState.activeEntry.ship.power
+        AppState.boss.durability -= AppState.activeEntry.ship.power
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id)
 
@@ -109,7 +109,14 @@ export default {
         }
 
       },
-
+      async bossAttack() {
+        try {
+          await bossService.bossAttack(route.params.id)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }
