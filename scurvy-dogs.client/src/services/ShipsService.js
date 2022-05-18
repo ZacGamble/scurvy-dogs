@@ -6,7 +6,6 @@ class ShipsService {
    async createShip(body){
     const res = await api.post('account/ship', body)
        AppState.ships.push(res.body)
-       const account = AppState.account.points += 10
        await api.put('account' ,account)
     logger.log(res.body)
     }
@@ -23,7 +22,7 @@ class ShipsService {
     }
 
     async upgradeStat(stat) {
-        AppState.points -= 1
+        AppState.account.points -= 1
         AppState.userShip[stat] += 1
         return await api.put('api/ships/' + AppState.userShip.id, AppState.userShip)
     }

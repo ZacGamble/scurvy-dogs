@@ -51,7 +51,7 @@
                 <i class="mdi mdi-bomb fs-4"></i>
                 POWER: {{ userShip.power }}
                 <div
-                  v-if="points > 0"
+                  v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
                   @click="upgrade('power')"
                 ></div>
@@ -60,7 +60,7 @@
               <h6 class="m-0">
                 <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
                 <div
-                  v-if="points > 0"
+                  v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
                   @click="upgrade('hull')"
                 ></div>
@@ -70,7 +70,7 @@
                 <i class="mdi mdi-sail-boat fs-4"></i> Speed:
                 {{ userShip.speed }}
                 <div
-                  v-if="points > 0"
+                  v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
                   @click="upgrade('speed')"
                 ></div>
@@ -125,6 +125,7 @@
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
 import { shipsService } from "../services/ShipsService";
+import { accountService } from "../services/AccountService";
 export default {
   setup() {
     return {
@@ -133,6 +134,7 @@ export default {
       userShip: computed(() => AppState.userShip),
       async upgrade(stat) {
         await shipsService.upgradeStat(stat);
+        await accountService.editAccount(AppState.account);
       },
     };
   },
