@@ -43,14 +43,14 @@
           >
             <option selected>Choose...</option>
             <option
-              value="https://www.neh.gov/sites/default/files/styles/medium/public/2018-06/2017_01-Winter_Pirates_07.jpg?itok=4ATHF-NN"
+              value="https://i.cbc.ca/1.6108621.1626722994!/fileImage/httpImage/image.jpg_gen/derivatives/original_780/flint-locke.jpg"
             >
-              angry
+              Angry
             </option>
             <option
-              value="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Tom-Kenny-as-Patchy-the-Pirate-in-SpongeBob-SquarePants.jpg?q=50&fit=crop&w=1788&dpr=1.5"
+              value="https://www.neh.gov/sites/default/files/styles/medium/public/2018-06/2017_01-Winter_Pirates_07.jpg?itok=4ATHF-NN"
             >
-              swift
+              Swift
             </option>
           </select>
         </div>
@@ -88,4 +88,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  height: 12em;
+  width: 9em;
+}
+img:hover {
+  transform: translateY(-5px) translateZ(5px);
+  box-shadow: 10em black;
+}
+</style>
