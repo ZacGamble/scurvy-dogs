@@ -10,24 +10,24 @@ export class BossesController extends BaseController
         {
             this.router
                 .use(Auth0Provider.getAuthorizedUserInfo)
-                .put("/:id", this.edit)
+                // .put("/:id", this.edit)
                 .delete("/:id", this.remove);
         }
     }
 
-    async edit(req, res, next)
-    {
-        try
-        {
-            req.body.id = req.params.id;
-            req.creatorId = req.userInfo.id;
-            return res.send();
-        }
-        catch(error)
-        {
-            next(error);
-        }
-    }
+    // async edit(req, res, next)
+    // {
+    //     try
+    //     {
+    //         req.body.id = req.params.id;
+    //         req.creatorId = req.userInfo.id;
+    //         return res.send();
+    //     }
+    //     catch(error)
+    //     {
+    //         next(error);
+    //     }
+    // }
 
     async remove(req, res, next)
     {
