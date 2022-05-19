@@ -1,6 +1,6 @@
 <template>
   <div class="row restrict">
-    <div class="">
+    <div class="boss">
       <div class="progress">
         <div
           class="progress-bar"
@@ -12,7 +12,11 @@
         ></div>
       </div>
       <div>
-        <img class="boss-img" src="https://thiscatdoesnotexist.com" alt="" />
+        <img
+          class="boss-img"
+          src="src\assets\img\MenacingPirateCaptain.webp"
+          alt=""
+        />
         <button @click="attack()" class="btn btn-danger">ATTACK</button>
         <button @click="bossAttack()" class="btn btn-warning">
           Boss Attack
@@ -22,10 +26,21 @@
 
     <div class="row d-flex justify-content-around bg-dark">
       <h2 id="dmg" class="dmg"></h2>
-      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
-      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
+      <img
+        class="ship-img"
+        src="https://thiscatdoesnotexist.com"
+        alt="player avatar"
+      />
+      <img
+        class="ship-img"
+        src="https://thiscatdoesnotexist.com"
+        alt="player avatar"
+      />
+      <img
+        class="ship-img"
+        src="https://thiscatdoesnotexist.com"
+        alt="player avatar"
+      />
     </div>
   </div>
 </template>
@@ -98,6 +113,10 @@ export default {
 <style lang="scss" scoped>
 .restrict {
   height: 100vh;
+}
+.bg-img {
+  background-image: url(C:\source\codeworks\scurvy-dogs\scurvy-dogs.client\src\assets\img\MoonlightVessel.webp);
+  background-size: cover;
 }
 .ship-img {
   border-radius: 50%;

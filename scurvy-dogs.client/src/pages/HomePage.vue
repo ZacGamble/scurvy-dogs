@@ -1,17 +1,15 @@
 <template>
-  <div class="">
-    <div class="row">
-      <div class="col-md-8">
-        <Login />
-        <!-- <button
+  <div class="row bg-img">
+    <div class="col-md-8">
+      <Login />
+      <!-- <button
           class="btn bg-black text-light"
           type="button"
           @click="openModal()"
         >
           create Ship
         </button> -->
-        <Boss />
-      </div>
+      <Boss />
     </div>
   </div>
   <Modal id="createShipModal">

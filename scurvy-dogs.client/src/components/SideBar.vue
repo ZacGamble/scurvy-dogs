@@ -13,7 +13,7 @@
               <h3>To Sea!</h3>
             </div>
           </router-link>
-          <router-link
+          <!-- <router-link
             :to="{ name: 'Ships' }"
             class="btn selectable text-uppercase"
           >
@@ -26,7 +26,7 @@
             >
               <h3>Stats</h3>
             </button>
-          </router-link>
+          </router-link> -->
 
           <Shop />
         </div>
