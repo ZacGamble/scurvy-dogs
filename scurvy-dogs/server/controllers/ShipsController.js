@@ -2,6 +2,7 @@ import { Auth0Provider } from "@bcwdev/auth0provider";
 import { historiesService } from "../services/HistoriesService.js";
 import { shipsService } from "../services/ShipsService.js";
 import { upgradesService } from "../services/UpgradesService.js";
+import { socketProvider } from "../SocketProvider.js";
 import BaseController from "../utils/BaseController.js";
 
 export class ShipsController extends BaseController
@@ -21,7 +22,9 @@ export class ShipsController extends BaseController
    async attack(req, res, next) {
         try {
             req.body.accountId = req.userInfo.id
-            return res.send(await shipsService.attack(req.body, req.params.id))
+            const bosshp = await shipsService.attack(req.body, req.params.id)
+            return res.send("niiiiiiiiiiice")
+
         } catch (error) {
             next(error)
         }

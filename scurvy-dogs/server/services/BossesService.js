@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js";
+import { socketProvider } from "../SocketProvider.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
 import { historiesService } from "./HistoriesService.js";
 import { lobbiesService } from "./LobbiesService.js";
@@ -38,6 +39,7 @@ class BossesService
         edited.durability = typeof update.durability === "number" ? update.durability : edited.durability;
         if(edited.durability <= 0){
             edited.isDefeated = true
+            socketProvider.messageRoom(edited.lobbyId.toString(), "bossdead", {});
             await lobbiesService.remove(edited.lobbyId)
         }
         await edited.save()
