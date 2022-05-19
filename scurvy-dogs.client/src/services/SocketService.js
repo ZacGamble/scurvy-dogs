@@ -1,3 +1,4 @@
+import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop'
 import { SocketHandler } from '../utils/SocketHandler'
@@ -8,11 +9,15 @@ class SocketService extends SocketHandler {
         this
         .on('error', this.onError)
         .on("joinlobby", this.addToLobby)
-        .on("leavelobby", this.removeFromLobby)
     }
 
     onError(e) {
         Pop.toast(e.message, 'error')
+    }
+
+    newEntry(entry)
+    {
+        this.emit("newentry", entry);
     }
 
     joinLobby(entry)
@@ -27,12 +32,8 @@ class SocketService extends SocketHandler {
 
     addToLobby(event)
     {
-        logger.log("Socket join > ", event)
-    }
-
-    removeFromLobby(event)
-    {
-        logger.log("Socket leave > ", event)
+        logger.log("new entry join > ", event)
+        AppState.ships.push(event)
     }
 }
 

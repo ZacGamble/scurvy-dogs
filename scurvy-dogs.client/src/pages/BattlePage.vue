@@ -54,11 +54,19 @@ export default {
         loader.step(entriesService.getByLobby, [route.params.id])
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
+        if(!AppState.userShip.id)
+        {
+            loader.step(shipsService.getUserShip, []);
+        }
         await loader.load()
         if (!AppState.activeEntry) {
           await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
+          socketService.newEntry(AppState.activeEntry);
         }
-        socketService.joinLobby(AppState.activeEntry);
+        else
+        {
+            socketService.joinLobby(AppState.activeEntry);
+        }
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
