@@ -1,58 +1,31 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="row d-block">
-          <div class="col-8">
-            <div class="">
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :style="'width: ' + boss?.durability / 10 + '%;'"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-              <img
-                class="boss-img"
-                src="https://thiscatdoesnotexist.com"
-                alt=""
-              />
-              <button @click="attack()" class="btn btn-danger">ATTACK</button>
-              <button @click="bossAttack()" class="btn btn-warning">
-                Boss Attack
-              </button>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="row justify-content-around bg-dark">
-              <h2 id="dmg" class="dmg"></h2>
-              <img
-                class="ship-img"
-                src="https://thiscatdoesnotexist.com"
-                alt=""
-              />
-              <img
-                class="ship-img"
-                src="https://thiscatdoesnotexist.com"
-                alt=""
-              />
-              <img
-                class="ship-img"
-                src="https://thiscatdoesnotexist.com"
-                alt=""
-              />
-              <img
-                class="ship-img"
-                src="https://thiscatdoesnotexist.com"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
+  <div class="row restrict">
+    <div class="">
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          :style="'width: ' + boss?.durability / 10 + '%;'"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
       </div>
+      <div>
+        <img class="boss-img" src="https://thiscatdoesnotexist.com" alt="" />
+        <button @click="attack()" class="btn btn-danger">ATTACK</button>
+        <button @click="bossAttack()" class="btn btn-warning">
+          Boss Attack
+        </button>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-around bg-dark">
+      <h2 id="dmg" class="dmg"></h2>
+      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
+      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
+      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
+      <img class="ship-img" src="https://thiscatdoesnotexist.com" alt="" />
     </div>
   </div>
 </template>
@@ -123,6 +96,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.restrict {
+  height: 100vh;
+}
 .ship-img {
   border-radius: 50%;
   max-inline-size: 10em;
@@ -154,10 +130,12 @@ export default {
   animation: dmg 5s;
 }
 
-// .boss-img {
-//   animation: sway 0.5s alternate infinite;
-//   animation-duration: 1.2s;
-// }
+.boss-img {
+  height: 35%;
+  width: 40%;
+  // animation: sway 0.5s alternate infinite;
+  // animation-duration: 1.2s;
+}
 
 @keyframes dmg {
   from {
@@ -189,7 +167,7 @@ export default {
   }
   to {
     margin-left: 0;
-    transform: translateY(20%) scaleX(1);
+    transform: translateY(-20%) scaleX(1);
   }
 }
 
