@@ -6,6 +6,7 @@
           class="progress-bar"
           role="progressbar"
           :style="'width: ' + boss?.durability / 10 + '%;'"
+          style="background-color: red"
           aria-valuenow="100"
           aria-valuemin="0"
           aria-valuemax="100"
@@ -20,6 +21,14 @@
         <button @click="attack()" class="btn btn-danger">ATTACK</button>
         <button @click="bossAttack()" class="btn btn-warning">
           Boss Attack
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#battleStats"
+        >
+          Launch backdrop modal
         </button>
       </div>
     </div>
@@ -43,6 +52,12 @@
       />
     </div>
   </div>
+  <Modal id="battleStats">
+    <template #title>
+      <h1>Fight over</h1>
+    </template>
+    <template #body> Stats from the battle </template>
+  </Modal>
 </template>
 
 <script>
@@ -69,18 +84,16 @@ export default {
         loader.step(entriesService.getByLobby, [route.params.id])
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
-        if(!AppState.userShip.id)
-        {
-            loader.step(shipsService.getUserShip, []);
+        if (!AppState.userShip.id) {
+          loader.step(shipsService.getUserShip, []);
         }
         await loader.load()
         if (!AppState.activeEntry) {
           await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
           socketService.newEntry(AppState.activeEntry);
         }
-        else
-        {
-            socketService.joinLobby(AppState.activeEntry);
+        else {
+          socketService.joinLobby(AppState.activeEntry);
         }
       } catch (error) {
         logger.error(error)
@@ -89,7 +102,7 @@ export default {
     })
 
     onBeforeUnmount(() => {
-        socketService.leaveLobby(AppState.activeEntry);
+      socketService.leaveLobby(AppState.activeEntry);
     });
 
     return {
