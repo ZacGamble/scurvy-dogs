@@ -1,3 +1,4 @@
+import { socketProvider } from '../SocketProvider.js';
 import { SocketHandler } from '../utils/SocketHandler'
 
 export class TestHandler extends SocketHandler {
@@ -8,10 +9,24 @@ export class TestHandler extends SocketHandler {
   constructor(io, socket) {
     super(io, socket)
     this
-      .on('SOCKET_TEST', this.testEvent)
+      .on("joinlobby", this.addToLobby)
+      .on("leavelobby", this.removeFromLobby)
+      .on("newentry", this.newEntry)
   }
 
-  async testEvent(payload) {
-    this.socket.emit('IS_TESTED', payload)
+  newEntry(payload)
+  {
+      socketProvider.messageRoom(payload.lobbyId, "joinlobby", payload);
+      this.addToLobby(payload)
+  }
+
+  addToLobby(payload)
+  {
+      this.socket.join(payload.lobbyId);
+  }
+
+  removeFromLobby(payload)
+  {
+    this.socket.leave(payload.lobbyId);    
   }
 }

@@ -52,11 +52,12 @@ import { bossService } from '../services/BossService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { AppState } from '../AppState';
-import { onMounted } from '@vue/runtime-core';
+import { onBeforeUnmount, onMounted } from '@vue/runtime-core';
 import { combatService } from '../services/CombatService';
 import { shipsService } from '../services/ShipsService';
 import { entriesService } from '../services/EntriesService.js';
 import Loader from '../utils/Loader.js'
+import { socketService } from '../services/SocketService.js';
 export default {
 
   setup() {
@@ -68,15 +69,28 @@ export default {
         loader.step(entriesService.getByLobby, [route.params.id])
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
+        if(!AppState.userShip.id)
+        {
+            loader.step(shipsService.getUserShip, []);
+        }
         await loader.load()
         if (!AppState.activeEntry) {
           await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
+          socketService.newEntry(AppState.activeEntry);
+        }
+        else
+        {
+            socketService.joinLobby(AppState.activeEntry);
         }
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
       }
     })
+
+    onBeforeUnmount(() => {
+        socketService.leaveLobby(AppState.activeEntry);
+    });
 
     return {
       boss: computed(() => AppState.boss),
