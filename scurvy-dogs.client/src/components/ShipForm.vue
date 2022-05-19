@@ -17,18 +17,12 @@
         </div>
         <div class="row my-3">
           <div class="col-md-6">
-            <h5>Angry</h5>
-            <img
-              class="img-fluid"
-              src="https://i.cbc.ca/1.6108621.1626722994!/fileImage/httpImage/image.jpg_gen/derivatives/original_780/flint-locke.jpg"
-            />
+            <h5>Swift</h5>
+            <img class="img-fluid" src="../assets/img/2nd_ship_new_3.png" />
           </div>
           <div class="col-md-6">
-            <h5>Swift</h5>
-            <img
-              class="img-fluid"
-              src="https://www.neh.gov/sites/default/files/styles/medium/public/2018-06/2017_01-Winter_Pirates_07.jpg?itok=4ATHF-NN"
-            />
+            <h5>Heavy</h5>
+            <img class="img-fluid" src="../assets/img/1stship_3.png" />
           </div>
         </div>
         <div class="input-group mb-3">
@@ -42,16 +36,8 @@
             required
           >
             <option selected>Choose...</option>
-            <option
-              value="https://i.cbc.ca/1.6108621.1626722994!/fileImage/httpImage/image.jpg_gen/derivatives/original_780/flint-locke.jpg"
-            >
-              Angry
-            </option>
-            <option
-              value="https://www.neh.gov/sites/default/files/styles/medium/public/2018-06/2017_01-Winter_Pirates_07.jpg?itok=4ATHF-NN"
-            >
-              Swift
-            </option>
+            <option value="src/assets/img/2nd_ship_new_3.png">Swift</option>
+            <option value="src/assets/img/1stship_3.png">Heavy</option>
           </select>
         </div>
 

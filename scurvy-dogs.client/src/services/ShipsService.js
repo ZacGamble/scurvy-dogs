@@ -6,7 +6,7 @@ class ShipsService {
    async createShip(body){
     const res = await api.post('account/ship', body)
        AppState.ships.push(res.body)
-       await api.put('account' ,account)
+       await api.put('account' ,AppState.account)
     logger.log(res.body)
     }
 

@@ -1,51 +1,53 @@
 <template>
-  <div class="row d-flex bg-light boss-card m-5">
-    <div class="col-md-6">
-      <span class="d-flex">
-        <div
-          @click="openBattle()"
-          class="left-triangle action"
-          title="Fight the Boss!"
-        ></div>
+  <div class="container-fluid">
+    <div class="row bg-primary boss-card m-5 rounded justify-content-center">
+      <div class="col-md-6 p-0">
+        <span class="d-flex">
+          <div
+            @click="openBattle()"
+            class="left-triangle action"
+            title="Fight the Boss!"
+          ></div>
 
-        <i class="mdi mdi-skull fs-1"></i>
-        <h4 class="mt-3">Mango Mangler</h4>
-      </span>
-      <h5 class="ps-5 mb-4">
-        Diffictuly:
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star"></i>
-      </h5>
-      <h5 class="d-flex ps-5">
-        Power:
-        <p class="text-danger fw-bold">14</p>
-      </h5>
-      <h5 class="d-flex ps-5">
-        Hull:
-        <p class="text-danger fw-bold">14</p>
-      </h5>
-      <h5 class="d-flex ps-5">
-        Reward Level:
-        <p class="text-warning fw-bold">RARE</p>
-      </h5>
-    </div>
-    <div class="col-6 p-2">
-      <img
-        class="img-fluid"
-        src="http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/9a18959b9113741.png"
-      />
+          <i class="mdi mdi-skull fs-1"></i>
+          <h4 class="mt-3">Mango Mangler</h4>
+        </span>
+        <h5 class="ps-5 mb-4">
+          Diffictuly:
+          <i class="mdi mdi-star"></i>
+          <i class="mdi mdi-star"></i>
+          <i class="mdi mdi-star"></i>
+        </h5>
+        <h5 class="d-flex ps-5">
+          Power:
+          <p class="text-danger fw-bold">14</p>
+        </h5>
+        <h5 class="d-flex ps-5">
+          Hull:
+          <p class="text-danger fw-bold">14</p>
+        </h5>
+        <h5 class="d-flex ps-5">
+          Reward Level:
+          <p class="text-warning fw-bold">RARE</p>
+        </h5>
+      </div>
+      <div class="col-6 p-2">
+        <img
+          class="img-fluid"
+          src="http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/9a18959b9113741.png"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { router } from '../router';
-import { logger } from '../utils/Logger';
-import Pop from '../utils/Pop';
-import { lobbiesService } from '../services/LobbiesService.js'
-import { entriesService } from '../services/EntriesService.js'
-import { AppState } from '../AppState';
+import { router } from "../router";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { lobbiesService } from "../services/LobbiesService.js";
+import { entriesService } from "../services/EntriesService.js";
+import { AppState } from "../AppState";
 export default {
   props: {
     boss: {
@@ -57,20 +59,19 @@ export default {
     return {
       async openBattle() {
         if (AppState.userShip.accountId != AppState.account.id) {
-          Pop.toast('Ye must first acquire a ship!', 'warning')
-          return
+          Pop.toast("Ye must first acquire a ship!", "warning");
+          return;
         }
         try {
-          const id = await lobbiesService.create()
+          const id = await lobbiesService.create();
           const newEntry = { lobbyId: id, shipId: AppState.userShip.id };
           await entriesService.create(newEntry);
-          router.push({ name: 'Battle', params: { id } })
-
+          router.push({ name: "Battle", params: { id } });
         } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
+          logger.error(error);
+          Pop.toast(error.message, "error");
         }
-      }
+      },
     };
   },
 };
@@ -80,12 +81,23 @@ export default {
 .left-triangle {
   height: 0;
   width: 0;
-  border-top: 5em red solid;
-  border-right: 5em transparent solid;
+  border-top: 7em #e8d8bd solid;
+  border-right: 7em transparent solid;
+  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.584);
+}
+
+.left-triangle:hover {
+  height: 0;
+  width: 0;
+  border-top: 7em #63462d solid;
+  border-right: 7em transparent solid;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.584);
+  transition-duration: 80ms;
 }
 
 .boss-card {
   outline: 0.1em rgb(0, 0, 0) solid;
-  border: 1em rgb(255, 255, 255) solid;
+  border: 1em #63462d solid;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.577);
 }
 </style>

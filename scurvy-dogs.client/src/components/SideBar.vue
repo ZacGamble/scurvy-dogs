@@ -1,11 +1,18 @@
 <template>
-  <nav class="sidebar px-3 text-dark">
+  <nav class="sidebar px-3 text-dark rounded">
     <header class="">
       <div class="row">
         <div class="col-12 text-center">
+          <div class="bg-info"><Login /></div>
+
           <h1>{{ userShip.name }}</h1>
         </div>
         <div class="col d-flex m-3 ps-4">
+          <router-link class="" :to="{ name: 'Home' }">
+            <div class="d-flex text-dark btn btn-secondary">
+              <h3>To Sea!</h3>
+            </div>
+          </router-link>
           <router-link
             :to="{ name: 'Ships' }"
             class="btn selectable text-uppercase"
@@ -20,33 +27,26 @@
               <h3>Stats</h3>
             </button>
           </router-link>
-          <router-link class="d-flex" :to="{ name: 'Home' }">
-            <div class="d-flex text-dark btn btn-secondary">
-              <h3>To Sea!</h3>
-            </div>
-          </router-link>
-          <button
-            class="btn text-dark btn-info selectable mx-2"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample"
-          >
-            <h3>Shop</h3>
-          </button>
+
           <Shop />
         </div>
       </div>
     </header>
-    <div class="row d-block">
-      <div class="col">
-        <div class="row d-flex">
+    <div class="row">
+      <div class="col p-0">
+        <div class="row d-flex p-0">
           <div class="col-6">
             <img class="img-fluid" :src="userShip.img" />
           </div>
           <div class="col-6">
             <div class="">
-              <h6>{{ account.points }}</h6>
+              <h6
+                title=" Gain more upgrade points by participating in Legendary Ship battles"
+                class="p-1"
+              >
+                Upgrade Points: {{ account.points }}
+              </h6>
+              <p></p>
               <h6 class="m-0">
                 <i class="mdi mdi-bomb fs-4"></i>
                 POWER: {{ userShip.power }}
@@ -78,43 +78,7 @@
               <p>Chance of dodge</p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="col p-1 equipment">
-        <div class="row d-flex m-3">
-          <div class="col-3">
-            <div class="box">
-              <img
-                class="img-fluid"
-                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
-              />
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="box">
-              <img
-                class="img-fluid"
-                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
-              />
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="box">
-              <img
-                class="img-fluid"
-                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
-              />
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="box">
-              <img
-                class="img-fluid"
-                src="https://cdn-icons-png.flaticon.com/512/108/108988.png"
-              />
-            </div>
-          </div>
+          <div class="left-triangle p-0 m-0"></div>
         </div>
       </div>
     </div>
@@ -155,7 +119,9 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 .sidebar {
-  border: black 2px solid;
+  outline: 0.1em rgb(0, 0, 0) solid;
+  border: 1em #63462d solid;
+
   height: 100%;
   background-color: #e8d8bd;
 }
@@ -174,7 +140,10 @@ p {
   background: #c9baa1;
 }
 
-.equipment {
-  margin-bottom: 1em;
+.left-triangle {
+  height: 0;
+  width: 0;
+  border-bottom: 7em #63462d solid;
+  border-right: 7em transparent solid;
 }
 </style>
