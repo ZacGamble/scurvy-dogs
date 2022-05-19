@@ -9,6 +9,7 @@ class SocketService extends SocketHandler {
         this
         .on('error', this.onError)
         .on("joinlobby", this.addToLobby)
+        .on("bosshp", this.setBossHp)
     }
 
     onError(e) {
@@ -34,6 +35,12 @@ class SocketService extends SocketHandler {
     {
         logger.log("new entry join > ", event)
         AppState.ships.push(event)
+    }
+
+    setBossHp(hp)
+    {
+        logger.log(hp);
+        AppState.boss.durability = hp;
     }
 }
 

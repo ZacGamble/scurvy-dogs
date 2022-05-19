@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js";
+import { socketProvider } from "../SocketProvider.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
 import { bossesService } from "./BossesService.js";
 import { historiesService } from "./HistoriesService.js";
@@ -14,13 +15,13 @@ class ShipsService
         if(!targetShip){
             throw new BadRequest('Did you start your ocean yet?!')
         }
-        await historiesService.addDamageDone(actor, actorShip.power);
-        await historiesService.checkLargestDamage(actor, actorShip.power);
         const update = {}
         update.id = targetId
         update.durability = targetShip.durability - actorShip.power
+        socketProvider.messageRoom(actor.lobbyId, "bosshp", update.durability);
+        await historiesService.addDamageDone(actor, actorShip.power);
+        await historiesService.checkLargestDamage(actor, actorShip.power);
         await bossesService.edit(update)
-        return targetShip
         }
     async getByAccount(accountId)
     {
