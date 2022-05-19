@@ -97,8 +97,8 @@ export default {
       userShip: computed(() => AppState.userShip),
       userShip: computed(() => AppState.userShip),
       async upgrade(stat) {
-        await shipsService.upgradeStat(stat);
         AppState.account.points -= 1;
+        await shipsService.upgradeStat(stat);
         await accountService.editAccount(AppState.account);
       },
     };

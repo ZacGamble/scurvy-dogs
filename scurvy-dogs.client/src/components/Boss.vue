@@ -33,7 +33,7 @@
           <p class="text-warning fw-bold">RARE</p>
         </h5>
       </div>
-      <div class="col-6 p-2">
+      <div class="col-6 p-2 mt-5">
         <img
           class="img-fluid"
           src="http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/9a18959b9113741.png"
@@ -124,7 +124,7 @@ export default {
 
 .left-triangle:hover > .boss-text {
   font-size: 2em;
-  transition-duration: 20ms;
+  transition-duration: 80ms;
   color: gold;
 }
 </style>
