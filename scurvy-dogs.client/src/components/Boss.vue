@@ -7,7 +7,9 @@
             @click="openBattle()"
             class="left-triangle action"
             title="Fight the Boss!"
-          ></div>
+          >
+            <p class="boss-text">Fight!</p>
+          </div>
 
           <i class="mdi mdi-skull fs-1"></i>
           <h4 class="mt-3">Mango Mangler</h4>
@@ -93,11 +95,36 @@ export default {
   border-right: 7em transparent solid;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.584);
   transition-duration: 80ms;
+  content: "Fight Boss";
+}
+
+.left-triangle:active {
+  border: 100em #314ba3 solid;
+  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.584);
+  z-index: 3;
+  transition-duration: 20ms;
 }
 
 .boss-card {
   outline: 0.1em rgb(0, 0, 0) solid;
   border: 1em #63462d solid;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.577);
+}
+
+.boss-text {
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+  top: 16%;
+  left: 6%;
+  transform: rotate(-45deg);
+  font-weight: bold;
+  transition-duration: 80ms;
+}
+
+.left-triangle:hover > .boss-text {
+  font-size: 2em;
+  transition-duration: 20ms;
+  color: gold;
 }
 </style>
