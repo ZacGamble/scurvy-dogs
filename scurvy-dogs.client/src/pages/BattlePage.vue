@@ -54,9 +54,20 @@
   </div>
   <Modal id="battleStats">
     <template #title>
-      <h1>Fight over</h1>
+      <h1 class="fw-bold">
+        <!-- TODO v-if to check if boss or ship died first, then display victory or defeat respectively -->
+        Fight over!<br />
+        Stats from the battle
+      </h1>
     </template>
-    <template #body> Stats from the battle </template>
+    <template #body>
+      <div class="d-flex flex-column fs-2">
+        <span>Damage you dealt: {{ currentHistory.damageDone }}</span>
+        <span>Damage you took: {{ currentHistory.damageTaken }}</span>
+        <span>Your strongest hit: {{ currentHistory.largestHit }}</span>
+        <span>Damage you dodged: {{ currentHistory.damageDodged }}</span>
+      </div>
+    </template>
   </Modal>
 </template>
 
@@ -73,6 +84,7 @@ import { shipsService } from '../services/ShipsService';
 import { entriesService } from '../services/EntriesService.js';
 import Loader from '../utils/Loader.js'
 import { socketService } from '../services/SocketService.js';
+import { Modal } from 'bootstrap';
 export default {
 
   setup() {
@@ -107,12 +119,19 @@ export default {
 
     return {
       boss: computed(() => AppState.boss),
+      currentHistory: computed(() => AppState.currentHistory),
       ships: computed(() => AppState.ships),
       lobbyShips: computed(() => AppState.lobbyShips),
       attackPower: computed(() => AppState.userShip.power),
 
       async attack() {
+
         AppState.boss.durability -= AppState.activeEntry.ship.power
+        logger.log("BattlePage > Attack method > ", AppState.boss.durability)
+
+        if (AppState.boss.durability <= 0) {
+          Modal.getOrCreateInstance(document.getElementById("battleStats")).show()
+        }
         try {
           await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id, route.params.id)
 
@@ -127,6 +146,7 @@ export default {
       async bossAttack() {
         try {
           await bossService.bossAttack(route.params.id)
+          logger.log("BattlePage > boss Attack >", AppState.userShip.durability)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

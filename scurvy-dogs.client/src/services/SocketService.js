@@ -49,7 +49,7 @@ class SocketService extends SocketHandler {
     {
         logger.log("boss has died");
         AppState.currentHistory = (await api.get("api/lobby/" + AppState.activeEntry.lobbyId + "/history")).data.find(h => h.accountId === AppState.activeEntry.accountId);
-        logger.log(AppState.currentHistory);
+        logger.log("Socket service > bossDead >", AppState.currentHistory);
     }
 }
 
