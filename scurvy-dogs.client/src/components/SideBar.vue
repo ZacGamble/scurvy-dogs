@@ -5,7 +5,7 @@
         <div class="col-12 text-center">
           <div class="bg-info"><Login /></div>
 
-          <h1>{{ userShip.name }}</h1>
+          <h1>{{ activeShip.name }}</h1>
         </div>
         <div class="col d-flex m-3 ps-4">
           <router-link class="" :to="{ name: 'Home' }">
@@ -36,7 +36,7 @@
       <div class="col p-0">
         <div class="row d-flex p-0">
           <div class="col-6">
-            <img class="img-fluid" :src="userShip.img" />
+            <img class="img-fluid" :src="activeShip.img" />
           </div>
           <div class="col-6">
             <div class="">
@@ -49,7 +49,7 @@
               <p></p>
               <h6 class="m-0">
                 <i class="mdi mdi-bomb fs-4"></i>
-                POWER: {{ userShip.power }}
+                POWER: {{ activeShip.power }}
                 <div
                   v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
@@ -58,7 +58,7 @@
               </h6>
               <p>Damage to enemies</p>
               <h6 class="m-0">
-                <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
+                <i class="mdi mdi-shield fs-4"></i> HULL: {{ activeShip.hull }}
                 <div
                   v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
@@ -68,7 +68,7 @@
               <p>Defends from attacks</p>
               <h6 class="m-0">
                 <i class="mdi mdi-sail-boat fs-4"></i> Speed:
-                {{ userShip.speed }}
+                {{ activeShip.speed }}
                 <div
                   v-if="account.points > 0"
                   class="btn mdi mdi-plus bg-danger btn-sm"
@@ -94,8 +94,7 @@ export default {
   setup() {
     return {
       account: computed(() => AppState.account),
-      userShip: computed(() => AppState.userShip),
-      userShip: computed(() => AppState.userShip),
+      activeShip: computed(() => AppState.activeShip),
       async upgrade(stat) {
         AppState.account.points -= 1;
         await shipsService.upgradeStat(stat);

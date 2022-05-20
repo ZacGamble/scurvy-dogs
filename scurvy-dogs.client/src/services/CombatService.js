@@ -16,6 +16,7 @@ class CombatService {
    const targetSpeed = Math.floor(Math.random() * target.speed)
    if (speed <= targetSpeed) {
      Pop.toast('MISS')
+     return
    }
    return hit = true
  }

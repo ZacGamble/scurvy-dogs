@@ -88,6 +88,7 @@ class ShipsService
             throw new Forbidden("You do not have permission to sink this ship.");
         }
         removed.isSunk = true;
+        socketProvider.messageUser(removed.accountId, "ship sunk", removed)
         await removed.save();
         return removed;
     }

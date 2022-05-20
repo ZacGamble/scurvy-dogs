@@ -2,7 +2,7 @@
   <header class="">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>{{ userShip.name }}</h1>
+        <h1>{{ activeShip.name }}</h1>
       </div>
       <div class="col d-flex m-3 ps-4">
         <button
@@ -28,20 +28,20 @@
           <div class="">
             <h6 class="m-0">
               <i class="mdi mdi-bomb fs-4"></i>
-              POWER: {{ userShip.power }}
+              POWER: {{ activeShip.power }}
 
               <div class="btn mdi mdi-plus" @click="upgrade('power')"></div>
             </h6>
             <p>Damage to enemies</p>
             <h6 class="m-0">
-              <i class="mdi mdi-shield fs-4"></i> HULL: {{ userShip.hull }}
+              <i class="mdi mdi-shield fs-4"></i> HULL: {{ activeShip.hull }}
 
               <div class="btn mdi mdi-plus" @click="upgrade('hull')"></div>
             </h6>
             <p>Defends from attacks</p>
             <h6 class="m-0">
               <i class="mdi mdi-sail-boat fs-4"></i> Speed:
-              {{ userShip.speed }}
+              {{ activeShip.speed }}
 
               <div class="btn mdi mdi-plus" @click="upgrade('speed')"></div>
             </h6>
@@ -60,7 +60,7 @@ import { shipsService } from "../services/ShipsService";
 export default {
   setup() {
     return {
-      userShip: computed(() => AppState.userShip),
+      activeShip: computed(() => AppState.activeShip),
       async upgrade(stat) {
         await shipsService.upgradeStat(stat);
       },

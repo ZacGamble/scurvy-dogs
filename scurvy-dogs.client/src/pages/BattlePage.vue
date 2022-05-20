@@ -22,14 +22,6 @@
         <button @click="bossAttack()" class="btn btn-warning">
           Boss Attack
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#battleStats"
-        >
-          Launch backdrop modal
-        </button>
       </div>
     </div>
 
@@ -96,12 +88,12 @@ export default {
         loader.step(entriesService.getByLobby, [route.params.id])
         loader.step(bossService.getBossById, [route.params.id])
         loader.step(shipsService.getShipsByEntry, [route.params.id])
-        if (!AppState.userShip.id) {
+        if (!AppState.activeShip.id) {
           loader.step(shipsService.getUserShip, []);
         }
         await loader.load()
         if (!AppState.activeEntry) {
-          await entriesService.create({ lobbyId: route.params.id, shipId: AppState.userShip.id })
+          await entriesService.create({ lobbyId: route.params.id, shipId: AppState.activeShip.id })
           socketService.newEntry(AppState.activeEntry);
         }
         else {
@@ -122,7 +114,7 @@ export default {
       currentHistory: computed(() => AppState.currentHistory),
       ships: computed(() => AppState.ships),
       lobbyShips: computed(() => AppState.lobbyShips),
-      attackPower: computed(() => AppState.userShip.power),
+      attackPower: computed(() => AppState.activeShip.power),
 
       async attack() {
 
@@ -145,8 +137,14 @@ export default {
       },
       async bossAttack() {
         try {
-          await bossService.bossAttack(route.params.id)
-          logger.log("BattlePage > boss Attack >", AppState.userShip.durability)
+          if (AppState.activeShip.durability > 0) {
+            await bossService.bossAttack(route.params.id)
+            logger.log("BattlePage > boss Attack >", AppState.activeShip.durability)
+          }
+          if (AppState.activeShip.durability <= 0) {
+            Pop.toast('Your ship was sunk')
+            await shipsService.sinkShip(AppState.activeShip.id)
+          }
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

@@ -60,13 +60,13 @@ export default {
   setup() {
     return {
       async openBattle() {
-        if (AppState.userShip.accountId != AppState.account.id) {
+        if (AppState.activeShip.accountId != AppState.account.id) {
           Pop.toast("Ye must first acquire a ship!", "warning");
           return;
         }
         try {
           const id = await lobbiesService.create();
-          const newEntry = { lobbyId: id, shipId: AppState.userShip.id };
+          const newEntry = { lobbyId: id, shipId: AppState.activeShip.id };
           await entriesService.create(newEntry);
           router.push({ name: "Battle", params: { id } });
         } catch (error) {

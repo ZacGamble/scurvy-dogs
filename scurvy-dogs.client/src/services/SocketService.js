@@ -12,6 +12,7 @@ class SocketService extends SocketHandler {
         .on("joinlobby", this.addToLobby)
         .on("bosshp", this.setBossHp)
         .on("bossdead", this.bossDead)
+        .on("ship sunk", this.shipSunk)
     }
 
     onError(e) {
@@ -50,6 +51,9 @@ class SocketService extends SocketHandler {
         logger.log("boss has died");
         AppState.currentHistory = (await api.get("api/lobby/" + AppState.activeEntry.lobbyId + "/history")).data.find(h => h.accountId === AppState.activeEntry.accountId);
         logger.log("Socket service > bossDead >", AppState.currentHistory);
+    }
+    async shipSunk(){
+        //TODO remove active ship or change it to nothing
     }
 }
 

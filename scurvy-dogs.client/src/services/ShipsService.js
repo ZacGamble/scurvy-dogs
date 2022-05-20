@@ -5,7 +5,7 @@ import { api } from "./AxiosService"
 class ShipsService {
    async createShip(body){
     const res = await api.post('account/ship', body)
-       AppState.userShip = res.data
+       AppState.activeShip = res.data
        await api.put('account' ,AppState.account)
     logger.log(res.body)
     }
@@ -17,14 +17,22 @@ class ShipsService {
     }
     async getUserShip(){
         const res = await api.get('account/ships')
-        AppState.userShip = res.data
-        logger.log("Ships service > getUserShips > ", res.data)
+        AppState.activeShip = {}
+        logger.log("Ships service > getactiveShips > ", res.data)
+        if(res.data.isSunk == false){
+            AppState.activeShip = res.data
+        }
     }
 
     async upgradeStat(stat) {
         
-        AppState.userShip[stat] += 1
-        return await api.put('api/ships/' + AppState.userShip.id, AppState.userShip)
+        AppState.activeShip[stat] += 1
+        return await api.put('api/ships/' + AppState.activeShip.id, AppState.activeShip)
+    }
+    async sinkShip(shipId){
+        const res = await api.delete('api/ships/' + shipId)
+        AppState.activeShip = {}
+        logger.log("Ships Service > sinkShip >",res.data)
     }
 
 }
