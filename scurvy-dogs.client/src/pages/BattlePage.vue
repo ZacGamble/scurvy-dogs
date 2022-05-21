@@ -143,7 +143,7 @@ export default {
           }
           if (AppState.activeShip.durability <= 0) {
             Pop.toast('Your ship was sunk')
-            await shipsService.sinkShip(AppState.activeShip.id)
+            await shipsService.sinkShip(AppState.activeShip?.id)
           }
         } catch (error) {
           logger.error(error)

@@ -40,14 +40,14 @@ export default {
       ).toggle();
     };
     onMounted(async () => {
-      if (AppState.userShip == "") {
-        logger.log(AppState.userShip);
+      if (!AppState.activeShip) {
+        logger.log(AppState.activeShip);
         openModal();
       }
     });
 
     return {
-      userShip: computed(() => AppState.userShip),
+      activeShip: computed(() => AppState.activeShip),
 
       async createShip() {
         try {

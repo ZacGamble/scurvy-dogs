@@ -52,10 +52,10 @@ class ShipsService
     async createShip(data)
     {
         const accountShipCount = (await dbContext.Ships.find({ accountId: data.accountId })).length;
-        if(accountShipCount >= 1)
-        {
-            throw new BadRequest("You already have a ship.");
-        }
+        // if(accountShipCount >= 1)
+        // {
+        //     throw new BadRequest("You already have a ship.");
+        // }
         data.durability = 100;
         data.power = 10;
         data.hull = 5;

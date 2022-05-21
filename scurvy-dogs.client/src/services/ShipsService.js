@@ -16,9 +16,9 @@ class ShipsService {
         logger.log('ships service > get Ships By Entry > ', res.data)
     }
     async getUserShip(){
-        const res = await api.get('account/ships')
-        AppState.activeShip = {}
-        logger.log("Ships service > getactiveShips > ", res.data)
+            const res = await api.get('account/ships')
+        // AppState.activeShip = null
+        logger.log("Ships service > getactiveShip > ", AppState.activeShip)
         if(res.data.isSunk == false){
             AppState.activeShip = res.data
         }

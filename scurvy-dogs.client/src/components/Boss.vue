@@ -60,7 +60,7 @@ export default {
   setup() {
     return {
       async openBattle() {
-        if (AppState.activeShip.accountId != AppState.account.id) {
+        if (AppState.activeShip?.accountId != AppState.account.id) {
           Pop.toast("Ye must first acquire a ship!", "warning");
           return;
         }
