@@ -26,22 +26,7 @@
     </div>
 
     <div class="row d-flex justify-content-around bg-dark">
-      <h2 id="dmg" class="dmg"></h2>
-      <img
-        class="ship-img"
-        src="https://thiscatdoesnotexist.com"
-        alt="player avatar"
-      />
-      <img
-        class="ship-img"
-        src="https://thiscatdoesnotexist.com"
-        alt="player avatar"
-      />
-      <img
-        class="ship-img"
-        src="https://thiscatdoesnotexist.com"
-        alt="player avatar"
-      />
+      <Ship v-for="s in lobbyShips" :key="s.id" :ship="s" />
     </div>
   </div>
   <Modal id="battleStats">
@@ -64,46 +49,46 @@
 </template>
 
 <script>
-import { computed } from '@vue/reactivity';
-import { useRoute } from 'vue-router';
-import { bossService } from '../services/BossService';
-import { logger } from '../utils/Logger';
-import Pop from '../utils/Pop';
-import { AppState } from '../AppState';
-import { onBeforeUnmount, onMounted } from '@vue/runtime-core';
-import { combatService } from '../services/CombatService';
-import { shipsService } from '../services/ShipsService';
-import { entriesService } from '../services/EntriesService.js';
-import Loader from '../utils/Loader.js'
-import { socketService } from '../services/SocketService.js';
-import { Modal } from 'bootstrap';
+import { computed } from "@vue/reactivity";
+import { useRoute } from "vue-router";
+import { bossService } from "../services/BossService";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { AppState } from "../AppState";
+import { onBeforeUnmount, onMounted } from "@vue/runtime-core";
+import { combatService } from "../services/CombatService";
+import { shipsService } from "../services/ShipsService";
+import { entriesService } from "../services/EntriesService.js";
+import Loader from "../utils/Loader.js";
+import { socketService } from "../services/SocketService.js";
+import { Modal } from "bootstrap";
 export default {
-
   setup() {
-    const route = useRoute()
+    const route = useRoute();
     onMounted(async () => {
-
       try {
-        const loader = new Loader()
-        loader.step(entriesService.getByLobby, [route.params.id])
-        loader.step(bossService.getBossById, [route.params.id])
-        loader.step(shipsService.getShipsByEntry, [route.params.id])
+        const loader = new Loader();
+        loader.step(entriesService.getByLobby, [route.params.id]);
+        loader.step(bossService.getBossById, [route.params.id]);
+        loader.step(shipsService.getShipsByEntry, [route.params.id]);
         if (!AppState.activeShip.id) {
           loader.step(shipsService.getUserShip, []);
         }
-        await loader.load()
+        await loader.load();
         if (!AppState.activeEntry) {
-          await entriesService.create({ lobbyId: route.params.id, shipId: AppState.activeShip.id })
+          await entriesService.create({
+            lobbyId: route.params.id,
+            shipId: AppState.activeShip.id,
+          });
           socketService.newEntry(AppState.activeEntry);
-        }
-        else {
+        } else {
           socketService.joinLobby(AppState.activeEntry);
         }
       } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
+        logger.error(error);
+        Pop.toast(error.message, "error");
       }
-    })
+    });
 
     onBeforeUnmount(() => {
       socketService.leaveLobby(AppState.activeEntry);
@@ -117,42 +102,48 @@ export default {
       attackPower: computed(() => AppState.activeShip.power),
 
       async attack() {
-
-        AppState.boss.durability -= AppState.activeEntry.ship.power
-        logger.log("BattlePage > Attack method > ", AppState.boss.durability)
+        AppState.boss.durability -= AppState.activeEntry.ship.power;
+        logger.log("BattlePage > Attack method > ", AppState.boss.durability);
 
         if (AppState.boss.durability <= 0) {
-          Modal.getOrCreateInstance(document.getElementById("battleStats")).show()
+          Modal.getOrCreateInstance(
+            document.getElementById("battleStats")
+          ).show();
         }
         try {
-          await combatService.attack(AppState.activeEntry.shipId, AppState.boss.id, route.params.id)
+          await combatService.attack(
+            AppState.activeEntry.shipId,
+            AppState.boss.id,
+            route.params.id
+          );
 
-          document.getElementById("dmg").innerHTML = this.attackPower
-
+          document.getElementById("dmg").innerHTML = this.attackPower;
         } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
+          logger.error(error);
+          Pop.toast(error.message, "error");
         }
-
       },
       async bossAttack() {
         try {
           if (AppState.activeShip.durability > 0) {
-            await bossService.bossAttack(route.params.id)
-            logger.log("BattlePage > boss Attack >", AppState.activeShip.durability)
+            await bossService.bossAttack(route.params.id);
+            logger.log(
+              "BattlePage > boss Attack >",
+              AppState.activeShip.durability
+            );
           }
           if (AppState.activeShip.durability <= 0) {
-            Pop.toast('Your ship was sunk')
-            await shipsService.sinkShip(AppState.activeShip?.id)
+            Pop.toast("Your ship was sunk");
+            await shipsService.sinkShip(AppState.activeShip?.id);
           }
         } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
+          logger.error(error);
+          Pop.toast(error.message, "error");
         }
-      }
-    }
-  }
-}
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
