@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar px-3 text-dark rounded">
+  <nav class="sidebar px-3 text-dark mt-3">
     <header class="">
       <div class="row">
         <div class="col-12 text-center">
@@ -78,7 +78,19 @@
               <p>Chance of dodge</p>
             </div>
           </div>
-          <div class="left-triangle p-0 m-0"></div>
+          <div class="left-triangle p-0"></div>
+          <div class="row d-flex p-4">
+            <div class="col-3 bg-info m-1">
+              <h5>Ships Slain:</h5>
+            </div>
+            <div class="col-3 bg-info m-1">
+              <h5>All Damage:</h5>
+            </div>
+            <div class="col-3 bg-info m-1">
+              <h5>Final Blows:</h5>
+            </div>
+            <div class="col-3 bg-info m-1"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -118,10 +130,7 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 .sidebar {
-  outline: 0.1em rgb(0, 0, 0) solid;
-  border: 1em #63462d solid;
-
-  height: 100%;
+  height: 80vh;
   background-color: #e8d8bd;
 }
 
@@ -142,7 +151,7 @@ p {
 .left-triangle {
   height: 0;
   width: 0;
-  border-bottom: 7em #63462d solid;
-  border-right: 7em transparent solid;
+  border-bottom: 3em #2f2115 solid;
+  border-right: 3em transparent solid;
 }
 </style>

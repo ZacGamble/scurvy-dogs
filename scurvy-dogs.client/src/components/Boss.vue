@@ -91,23 +91,16 @@ export default {
 .left-triangle:hover {
   height: 0;
   width: 0;
-  border-top: 7em #63462d solid;
+  border-top: 7em #2f2115 solid;
   border-right: 7em transparent solid;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.584);
   transition-duration: 80ms;
   content: "Fight Boss";
 }
 
-.left-triangle:active {
-  border: 100em #314ba3 solid;
-  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.584);
-  z-index: 3;
-  transition-duration: 20ms;
-}
-
 .boss-card {
   outline: 0.1em rgb(0, 0, 0) solid;
-  border: 1em #63462d solid;
+  border: 1em #2f2115 solid;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.577);
 }
 
@@ -115,16 +108,21 @@ export default {
   overflow: hidden;
   position: absolute;
   z-index: 2;
-  top: 16%;
-  left: 6%;
+  top: 10vh;
+  left: 7vw;
   transform: rotate(-45deg);
   font-weight: bold;
   transition-duration: 80ms;
 }
 
 .left-triangle:hover > .boss-text {
-  font-size: 2em;
+  font-size: 9em;
   transition-duration: 80ms;
-  color: gold;
+  color: rgb(127, 108, 0);
+}
+
+.left-triangle:active > .boss-card {
+  outline: 1em gold solid;
+  border: 1em gold solid;
 }
 </style>

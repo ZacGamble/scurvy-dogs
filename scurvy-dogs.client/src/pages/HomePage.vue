@@ -1,25 +1,15 @@
 <template>
-  <div class="row bg-img">
-    <div class="col-md-8">
-      <Login />
-      <!-- <button
-          class="btn bg-black text-light"
-          type="button"
-          @click="openModal()"
-        >
-          create Ship
-        </button> -->
-      <Boss />
-    </div>
+  <div class="home-page">
+    <Boss />
+    <Modal id="createShipModal">
+      <template #title>
+        <h3>Name Ye Ship!</h3>
+      </template>
+      <template #body>
+        <ShipForm />
+      </template>
+    </Modal>
   </div>
-  <Modal id="createShipModal">
-    <template #title>
-      <h3>Name Ye Ship!</h3>
-    </template>
-    <template #body>
-      <ShipForm />
-    </template>
-  </Modal>
 </template>
 
 <script>
@@ -65,5 +55,9 @@ export default {
 <style scoped lang="scss">
 .offcanvas {
   width: 50%;
+}
+
+.home-page {
+  height: 100%;
 }
 </style>
