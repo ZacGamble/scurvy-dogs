@@ -14,6 +14,13 @@ class BossesService
        for (let i = 0; i < foundShips.length; i++) {
             const ship = foundShips[i]
            ship.durability -= bossPower
+           socketProvider.messageRoom(lobbyId, "shipdamaged", ship);
+           if(ship.durability <= 0)
+           {
+                ship.isSunk = true;
+                socketProvider.messageUser(ship.accountId.toString(), "ship sunk", ship)
+                await ship.save();
+           }
            await historiesService.addDamageTaken({accountId: ship.accountId, shipId: ship.id, lobbyId}, bossPower);
            await ship.save()                      
        }

@@ -25,7 +25,7 @@ class ShipsService
         }
     async getByAccount(accountId)
     {
-        return await dbContext.Ships.findOne({ accountId });
+        return await dbContext.Ships.find({ accountId });
     }
 
     async getById(id)

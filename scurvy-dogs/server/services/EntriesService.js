@@ -21,6 +21,10 @@ class EntriesService
         {
             throw new Forbidden("You do not own that ship.");
         }
+        if(userShip.isSunk)
+        {
+            throw new BadRequest("You cannot enter with a sunken ship.");
+        }
         if((await lobbiesService.getById(data.lobbyId)).isFinished)
         {
             throw new BadRequest("That lobby is already over.");

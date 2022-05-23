@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest, Forbidden } from '../utils/Errors.js';
 import { shipsService } from './ShipsService.js';
 
 // Private Methods
@@ -78,6 +79,27 @@ class AccountService {
     return account
   }
 
-  
+    async setActiveShip(data)
+    {
+        const account = await dbContext.Account.findById(data.accountId);
+        const ship = await dbContext.Ships.findById(data.shipId);
+
+        if(!account)
+        {
+            throw new BadRequest("Could not find a account with that id.");
+        }
+        if(!ship)
+        {
+            throw new BadRequest("Could not find a ship with that id.");
+        }
+        if(ship.accountId.toString() !== account.id)
+        {
+            throw new Forbidden("You do not own that ship");
+        }
+
+        account.activeShipId = ship.id;
+        await account.save();
+        return ship;
+    }
 }
 export const accountService = new AccountService()

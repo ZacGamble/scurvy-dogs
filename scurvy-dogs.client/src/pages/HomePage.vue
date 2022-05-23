@@ -22,6 +22,18 @@ import { AppState } from "../AppState.js";
 import { accountService } from "../services/AccountService";
 export default {
   name: "Home",
+  watch:
+  {
+    userShips(newValue)
+    {
+        logger.log("watch", this.hasLivingShips);
+        if(newValue && !this.hasLivingShips)
+        {
+            this.openModal();
+        }
+    }
+  },
+
   setup() {
     const openModal = async () => {
       document.getElementById("shipForm").reset();
@@ -30,14 +42,19 @@ export default {
       ).toggle();
     };
     onMounted(async () => {
-      if (!AppState.activeShip) {
-        logger.log(AppState.activeShip);
+        logger.log("onMounted", hasLivingShips.value);
+      if (userShips.value && !hasLivingShips.value) {
         openModal();
       }
     });
 
+    const hasLivingShips = computed(() => AppState.userShips?.filter(ship => !ship.isSunk).length > 0);
+    const userShips = computed(() => AppState.userShips);
     return {
       activeShip: computed(() => AppState.activeShip),
+      userShips,
+      hasLivingShips,
+      openModal,
 
       async createShip() {
         try {

@@ -15,6 +15,7 @@ export class AccountController extends BaseController {
     .get("/entries", this.getEntries)
     .get("/history", this.getHistory)
     .post("/ship", this.createShip)
+    .post("/activeship", this.setActiveShip)
     .put('', this.edit)
   }
 
@@ -75,6 +76,19 @@ export class AccountController extends BaseController {
             next(error);
         }
   }
+
+    async setActiveShip(req, res, next)
+    {
+        try
+        {
+            const data = { accountId: req.userInfo.id, shipId: req.body.shipId }
+            return res.send(await accountService.setActiveShip(data));
+        }
+        catch(error)
+        {
+            next(error);
+        }
+    }
 
   async edit(req, res, next)
   {

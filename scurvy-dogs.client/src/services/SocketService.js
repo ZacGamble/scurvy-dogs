@@ -1,3 +1,4 @@
+import { useRouter } from 'vue-router'
 import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop'
@@ -13,6 +14,7 @@ class SocketService extends SocketHandler {
         .on("bosshp", this.setBossHp)
         .on("bossdead", this.bossDead)
         .on("ship sunk", this.shipSunk)
+        .on("shipdamaged", this.shipDamaged)
     }
 
     onError(e) {
@@ -52,8 +54,16 @@ class SocketService extends SocketHandler {
         AppState.currentHistory = (await api.get("api/lobby/" + AppState.activeEntry.lobbyId + "/history")).data.find(h => h.accountId === AppState.activeEntry.accountId);
         logger.log("Socket service > bossDead >", AppState.currentHistory);
     }
-    async shipSunk(){
-        //TODO remove active ship or change it to nothing
+    async shipSunk(payload){
+        logger.log("ship sunk")
+        AppState.currentHistory = (await api.get("api/lobby/" + AppState.activeEntry.lobbyId + "/history")).data.find(h => h.accountId === AppState.activeEntry.accountId);
+        AppState.userShips.find(ship => ship.id === payload.id).isSunk = true;
+        Pop.toast("Your ship sank", "error")
+    }
+
+    async shipDamaged(payload)
+    {
+        logger.log("ship damage", payload);
     }
 }
 

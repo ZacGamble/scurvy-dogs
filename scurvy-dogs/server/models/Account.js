@@ -9,7 +9,8 @@ export const AccountSchema = new Schema(
     picture: { type: String },
     points: { type: Number, default: 10 },
     // NOTE If you wish to add additional properties do so here
-    newAccount: { type: Boolean, default: true }
+    newAccount: { type: Boolean, default: true },
+    activeShipId: { type: Schema.Types.ObjectId, ref: "Ship" }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

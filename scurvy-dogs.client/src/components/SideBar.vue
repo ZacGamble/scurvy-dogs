@@ -7,6 +7,9 @@
 
           <h1>{{ activeShip?.name }}</h1>
         </div>
+        <select class="col-12" name="" id="" @change="setActiveShip" v-model="shipChoice">
+            <option v-for="s in userShips" :key="s.id" :value="s.id" :disabled="s.isSunk" :selected="s.id == activeShip.id">{{s.isSunk ? "(Sunken) " : ""}}{{s.name}}</option>
+        </select>
         <div class="col d-flex m-3 ps-4">
           <router-link class="" :to="{ name: 'Home' }">
             <div class="d-flex text-dark btn btn-secondary">
@@ -98,20 +101,38 @@
 </template>
 
 <script>
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { AppState } from "../AppState";
 import { shipsService } from "../services/ShipsService";
 import { accountService } from "../services/AccountService";
+import Pop from '../utils/Pop.js';
+import { logger } from '../utils/Logger.js';
 export default {
   setup() {
+      const shipChoice = ref("");
     return {
+        shipChoice,
       account: computed(() => AppState.account),
       activeShip: computed(() => AppState.activeShip),
+      userShips: computed(() => AppState.userShips),
       async upgrade(stat) {
         AppState.account.points -= 1;
         await shipsService.upgradeStat(stat);
         await accountService.editAccount(AppState.account);
       },
+      async setActiveShip()
+      {
+            try
+            {
+                await shipsService.setActiveShip(shipChoice.value);
+                Pop.toast("Ship successfully changed", "success");   
+            }
+            catch(error)
+            {
+                logger.error("[SideBar.vue > aetActiveShip]", error.message);
+                Pop.toast(error.message, "error");
+            }
+      }
     };
   },
 };

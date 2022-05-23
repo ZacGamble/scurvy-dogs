@@ -6,8 +6,15 @@ class ShipsService {
    async createShip(body){
     const res = await api.post('account/ship', body)
        AppState.activeShip = res.data
-       await api.put('account' ,AppState.account)
-    logger.log(res.body)
+       AppState.userShips.push(res.data)
+       await api.put('account', AppState.account)
+       await this.setActiveShip(res.data.id);
+       logger.log(res.body)
+    }
+    
+    async setActiveShip(shipId)
+    {
+        await api.post('account/activeship', { shipId });
     }
 
     async getShipsByEntry(id){
@@ -15,13 +22,14 @@ class ShipsService {
         AppState.lobbyShips = res.data
         logger.log('ships service > get Ships By Entry > ', res.data)
     }
-    async getUserShip(){
+    async getUserShips(){
             const res = await api.get('account/ships')
-        // AppState.activeShip = null
-        logger.log("Ships service > getactiveShip > ", AppState.activeShip)
-        if(res.data.isSunk == false){
-            AppState.activeShip = res.data
-        }
+        AppState.userShips = res.data
+        logger.log("Ships service > getUserShips > ", res.data)
+        AppState.activeShip = AppState.userShips.find(ship => ship.id === AppState.account.activeShipId)
+        // if(res.data.isSunk == false){
+        //     AppState.activeShip = res.data
+        // }
     }
 
     async upgradeStat(stat) {

@@ -11,5 +11,5 @@ export const AppState = reactive({
   ships: [],
   lobbyShips: [],
   activeShip: null,
-  userShips: []
+  userShips: null
 })

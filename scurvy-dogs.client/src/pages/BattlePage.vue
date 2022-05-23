@@ -50,7 +50,7 @@
 
 <script>
 import { computed } from "@vue/reactivity";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { bossService } from "../services/BossService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
@@ -63,16 +63,29 @@ import Loader from "../utils/Loader.js";
 import { socketService } from "../services/SocketService.js";
 import { Modal } from "bootstrap";
 export default {
+    watch:
+    {
+        userShipAlive(newValue)
+        {
+            if(!newValue)
+            {
+                logger.log("-------------------------------------------GO HOME");
+                this.router.push({name: "Home"});
+            }
+        }
+    },
+
   setup() {
     const route = useRoute();
+    const router = useRouter();
     onMounted(async () => {
       try {
         const loader = new Loader();
         loader.step(entriesService.getByLobby, [route.params.id]);
         loader.step(bossService.getBossById, [route.params.id]);
         loader.step(shipsService.getShipsByEntry, [route.params.id]);
-        if (!AppState.activeShip.id) {
-          loader.step(shipsService.getUserShip, []);
+        if (!AppState.activeShip?.id) {
+          loader.step(shipsService.getUserShips, []);
         }
         await loader.load();
         if (!AppState.activeEntry) {
@@ -95,11 +108,13 @@ export default {
     });
 
     return {
+        router,
       boss: computed(() => AppState.boss),
       currentHistory: computed(() => AppState.currentHistory),
       ships: computed(() => AppState.ships),
       lobbyShips: computed(() => AppState.lobbyShips),
       attackPower: computed(() => AppState.activeShip.power),
+      userShipAlive: computed(() => !AppState.activeShip.isSunk),
 
       async attack() {
         AppState.boss.durability -= AppState.activeEntry.ship.power;
