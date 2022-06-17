@@ -1,8 +1,13 @@
 <template>
   <div class="col-3">
     <div class="user-ship">
-      <h5>{{ ship.name }}</h5>
-      <h6>{{ ship.durability }}</h6>
+      <div class="user-ship-span">
+        <h5 class="text-warning text-center">{{ ship.name }}</h5>
+        <h6 class="text-success text-center">
+          Durability:{{ ship.durability }}
+        </h6>
+        <h6 class="text-danger text-center">Power: {{ ship.power }}</h6>
+      </div>
       <img :src="ship.img" class="img-fluid" />
     </div>
   </div>
@@ -22,7 +27,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-ship {
-  outline: 1em black solid;
+.user-ship-span {
+  background-color: rgba(0, 0, 0, 0.383);
+  border-radius: 1em;
 }
 </style>

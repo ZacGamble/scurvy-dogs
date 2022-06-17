@@ -14,6 +14,13 @@ class EntriesService
        AppState.activeEntry = res.data
        logger.log('Entries service > getByLobby > ', AppState.activeEntry)
     }
+
+     async delay(n) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, n * 1000)
+        });
+      }
 }
+
 
 export const entriesService = new EntriesService();

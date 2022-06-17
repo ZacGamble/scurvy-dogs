@@ -1,14 +1,19 @@
 <template>
-  <div class="home-page">
-    <Boss />
-    <Modal id="createShipModal">
-      <template #title>
-        <h3>Name Ye Ship!</h3>
-      </template>
-      <template #body>
-        <ShipForm />
-      </template>
-    </Modal>
+  <div class="row">
+    <div class="col-8">
+      <div class="home-page">
+        <Boss />
+        <Modal id="createShipModal">
+          <template #title>
+            <h3>Name Ye Ship!</h3>
+          </template>
+          <template #body>
+            <ShipForm />
+          </template>
+        </Modal>
+      </div>
+    </div>
+    <div class="col-md-4 side-stuff"><SideBar /></div>
   </div>
 </template>
 
@@ -22,16 +27,13 @@ import { AppState } from "../AppState.js";
 import { accountService } from "../services/AccountService";
 export default {
   name: "Home",
-  watch:
-  {
-    userShips(newValue)
-    {
-        logger.log("watch", this.hasLivingShips);
-        if(newValue && !this.hasLivingShips)
-        {
-            this.openModal();
-        }
-    }
+  watch: {
+    userShips(newValue) {
+      logger.log("watch", this.hasLivingShips);
+      if (newValue && !this.hasLivingShips) {
+        this.openModal();
+      }
+    },
   },
 
   setup() {
@@ -42,13 +44,15 @@ export default {
       ).toggle();
     };
     onMounted(async () => {
-        logger.log("onMounted", hasLivingShips.value);
+      logger.log("onMounted", hasLivingShips.value);
       if (userShips.value && !hasLivingShips.value) {
         openModal();
       }
     });
 
-    const hasLivingShips = computed(() => AppState.userShips?.filter(ship => !ship.isSunk).length > 0);
+    const hasLivingShips = computed(
+      () => AppState.userShips?.filter((ship) => !ship.isSunk).length > 0
+    );
     const userShips = computed(() => AppState.userShips);
     return {
       activeShip: computed(() => AppState.activeShip),
